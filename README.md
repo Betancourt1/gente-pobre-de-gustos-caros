@@ -243,7 +243,7 @@ Tres CSV complementan las tablas originales para ampliar la discusión sin publi
 | `h5_concentracion_nacional.csv` | Gini de D1 y D2, participación del 10% superior en ambas canastas y del 20% superior en D2. Los hogares se ordenan por gasto en la canasta correspondiente, no por ingreso. |
 | `h5_curva_lorenz_d2.csv` | 200 puntos interpolados de la curva de Lorenz ponderada de D2, ordenando hogares de menor a mayor gasto visible. Permite reproducir la curva; el Gini publicado se calcula sobre los datos originales, no sobre estos puntos interpolados. |
 
-Las participaciones, cargas y coeficientes se exportan como proporciones de 0 a 1, salvo indicadores rotulados explícitamente en puntos porcentuales o columnas `peso_pct`, que usan escala de 0 a 100. Los montos ENIGH son pesos trimestrales y los montos ENSAFI indicados como mensuales son pesos mensuales. `n` es el número de observaciones sin expandir. Las tablas permiten comparaciones descriptivas; no incluyen errores estándar ni intervalos de confianza.
+Las participaciones y cargas se exportan en escala proporcional (0.15 representa 15%); una carga puede superar 1. Los coeficientes de Gini usan escala de 0 a 1. Los indicadores rotulados en puntos porcentuales y las columnas `peso_pct` ya están multiplicados por 100. Los montos ENIGH son pesos trimestrales y los montos ENSAFI indicados como mensuales son pesos mensuales. `n` es el número de observaciones sin expandir. Las tablas permiten comparaciones descriptivas; no incluyen errores estándar ni intervalos de confianza.
 
 Para correr las pruebas:
 
