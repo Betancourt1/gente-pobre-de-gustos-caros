@@ -1,0 +1,24 @@
+# Microdatos crudos de INEGI (pesan cientos de MB; se descargan aparte)
+conjunto_de_datos_enigh2024_ns_csv/
+conjunto_de_datos_ensafi_2023_csv/
+# Descargas de microdatos, incluso si aún no se han descomprimido
+conjunto_de_datos_*.zip
+
+# Datos derivados y cachés
+data/processed/
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+*.egg-info/
+
+# Sistema operativo y editores
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
