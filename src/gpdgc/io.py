@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
 from . import config
 from .taxonomy import add_expense_flags
@@ -19,7 +20,8 @@ def _to_num(s: pd.Series, sentinels: tuple[float, ...] = ()) -> pd.Series:
     return out
 
 
-def _read(path, usecols=None, dtype=None) -> pd.DataFrame:
+def _read(path, usecols=None, dtype="string") -> pd.DataFrame:
+    """Preserva ceros iniciales; cada cargador convierte solo las magnitudes."""
     return pd.read_csv(
         path,
         encoding="utf-8",
@@ -85,8 +87,11 @@ def load_poblacion_hogar() -> pd.DataFrame:
     for col in ["folioviv", "foliohog", "numren", "parentesco", "sexo"]:
         df[col] = df[col].astype("string").str.strip()
     df["edad"] = _to_num(df["edad"])
+    # Mismo universo de integrantes que tot_integ en concentradohogar.
+    df = df[df["parentesco"].str[0].isin(["1", "2", "3", "5", "6"])].copy()
     df["es_joven"] = df["edad"].between(18, 29)
     df["es_menor"] = df["edad"] < 18
+    df["menor_14"] = df["edad"] < 14
     df["es_adulto_mayor"] = df["edad"] >= 65
     df["es_hijo"] = df["parentesco"].str.startswith("3", na=False)
     df["joven_hijo"] = df["es_joven"] & df["es_hijo"]
@@ -98,6 +103,7 @@ def load_poblacion_hogar() -> pd.DataFrame:
             n_jovenes=("es_joven", "sum"),
             n_jovenes_hijos=("joven_hijo", "sum"),
             n_menores=("es_menor", "sum"),
+            n_menores_14=("menor_14", "sum"),
             n_adultos_mayores=("es_adulto_mayor", "sum"),
         )
     )
@@ -105,26 +111,21 @@ def load_poblacion_hogar() -> pd.DataFrame:
 
 
 def load_gastos_hogar(force: bool = False) -> pd.DataFrame:
-    """Devuelve gasto del hogar (solo G1) agregado por canastas.
-
-    El archivo crudo pesa ~552 MB. El resultado agregado se cachea en
-    data/processed/gastos_hogar_g1.parquet.
-    """
-    cache = config.PROCESSED / "gastos_hogar_g1.parquet"
-    if cache.exists() and not force:
+    """Agrega consumo G1 de gastoshogar y gastospersona, sin duplicar registros."""
+    cache = config.PROCESSED / "gastos_consumo_g1_v2.parquet"
+    sources = [config.ENIGH_TABLES[t] for t in ("gastoshogar", "gastospersona")]
+    dependencies = sources + [Path(__file__), Path(__file__).with_name("taxonomy.py")]
+    if cache.exists() and not force and cache.stat().st_mtime >= max(
+        p.stat().st_mtime for p in dependencies
+    ):
         return pd.read_parquet(cache)
 
-    df = _read(
-        config.ENIGH_TABLES["gastoshogar"],
-        usecols=["folioviv", "foliohog", "clave", "tipo_gasto", "gasto_tri"],
-        dtype={
-            "folioviv": "string",
-            "foliohog": "string",
-            "clave": "string",
-            "tipo_gasto": "string",
-        },
+    df = pd.concat(
+        [_read(p, usecols=["folioviv", "foliohog", "clave", "tipo_gasto", "gasto_tri"])
+         for p in sources],
+        ignore_index=True,
     )
-    df["gasto_tri"] = _to_num(df["gasto_tri"])
+    df["gasto_tri"] = _to_num(df["gasto_tri"]).astype("float64")
     df = df[df["tipo_gasto"].eq("G1")].copy()
     df = add_expense_flags(df)
     df = df[df["es_consumo"]].copy()
@@ -195,9 +196,18 @@ def load_enigh_hogares(force_gastos: bool = False) -> pd.DataFrame:
     gas = load_gastos_hogar(force=force_gastos)
 
     # `viviendas` solo tiene folioviv; se une a todos los hogares de la vivienda.
-    df = hog.merge(viv, on="folioviv", how="left", suffixes=("", "_viv"))
-    df = df.merge(per, on=["folioviv", "foliohog"], how="left")
-    df = df.merge(gas, on=["folioviv", "foliohog"], how="left")
+    df = hog.merge(viv, on="folioviv", how="left", suffixes=("", "_viv"), validate="many_to_one")
+    df = df.merge(per, on=["folioviv", "foliohog"], how="left", validate="one_to_one")
+    if df["n_personas"].isna().any() or not df["n_personas"].eq(df["tot_integ"]).all():
+        raise ValueError("El cruce de población no concilia con tot_integ")
+    if df["tenencia"].isna().any():
+        raise ValueError("Hay hogares sin correspondencia en viviendas")
+    # Outer detecta claves de gastos perdidas, en lugar de convertirlas en ceros.
+    df = df.merge(gas, on=["folioviv", "foliohog"], how="outer", validate="one_to_one", indicator=True)
+    if df["_merge"].eq("right_only").any():
+        raise ValueError("Hay claves de gastos sin correspondencia en concentradohogar")
+    df["tiene_registros_gasto"] = df["_merge"].eq("both")
+    df = df.drop(columns="_merge")
 
     # Gasto total: si no hay renglones, 0.
     for c in [
@@ -220,9 +230,9 @@ def load_enigh_hogares(force_gastos: bool = False) -> pd.DataFrame:
         df[chapter] = df[chapter].fillna(0.0)
 
     # Escala de equivalencia OCDE modificada.
-    adultos = (df["tot_integ"] - df["menores"]).clip(lower=1)
+    adultos = df["tot_integ"] - df["n_menores_14"]
     df["adultos_eq"] = adultos
-    df["escala_eq"] = 1 + 0.5 * (adultos - 1) + 0.3 * df["menores"]
+    df["escala_eq"] = 1 + 0.5 * (adultos - 1) + 0.3 * df["n_menores_14"]
     df["ing_eq"] = df["ing_cor"] / df["escala_eq"]
     df["gasto_eq"] = df["gasto_total_g1"] / df["escala_eq"]
     df["gasto_d2_eq"] = df["gasto_d2"] / df["escala_eq"]
@@ -270,7 +280,12 @@ def load_enigh_hogares(force_gastos: bool = False) -> pd.DataFrame:
     # Deciles ponderados de ingreso equivalente.
     from .weights import add_weighted_deciles
 
+    # Mismo universo adulto en perfiles, deciles y concentración nacional.
+    n_source = len(df)
+    df = df[df["grupo_edad"].notna()].copy()
     df = add_weighted_deciles(df, "ing_eq", "factor", "decil_ing")
+    df.attrs["hogares_fuente"] = n_source
+    df.attrs["hogares_excluidos_edad"] = n_source - len(df)
 
     return df
 
@@ -375,20 +390,30 @@ def load_ensafi_personas() -> pd.DataFrame:
     )
     df["mujer"] = df["SEXO"].eq(2)
     df["tiene_afore"] = df["P6_2_10"].eq(1)
-    df["tiene_ahorro"] = df["P6_3"].eq(1)
+    # El salto de P6.3 corresponde a no tener las cuentas preguntadas.
+    df["reporta_ahorro_cuentas"] = df["P6_3"].eq(1).fillna(False)
     debt_cols = [f"P6_5_{i}" for i in range(1, 6)] + [f"P6_6_{i}" for i in range(1, 10)]
-    df["tiene_deuda"] = df[debt_cols].eq(1).any(axis=1)
-    df["atraso_pago"] = df["P6_7"].eq(1)
+    df["tiene_deuda_credito"] = df[debt_cols].eq(1).any(axis=1)
+    # Incidencia sobre adultos; el salto por no tener crédito no indica atraso.
+    df["reporta_atraso_pago"] = df["P6_7"].eq(1).fillna(False)
     df["ingreso_insuficiente"] = df["P6_9"].eq(2)
     df["alto_estres"] = df["NIV_ESTRES"].eq(1)
     df["sin_empleo"] = df["P5_14"].isin([3, 4, 5, 6, 7, 8, 9]) & df["P5_16"].eq(7)
-    cond_ahorro = df["P5_19"].gt(0).fillna(False) & df["P5_21"].notna()
-    df["tasa_ahorro"] = np.where(
-        cond_ahorro,
-        (df["P5_19"] - df["P5_21"]) / df["P5_19"],
-        np.nan,
+    df = add_monthly_comparison(df)
+    return df
+
+
+def add_monthly_comparison(df: pd.DataFrame) -> pd.DataFrame:
+    """Gasto vs. ingreso laboral mensual conocido; no estima ahorro total."""
+    df = df.copy()
+    # 98,000 es un límite abierto, no un monto exacto.
+    df["ingreso_laboral_mensual"] = df["INGRESO_M"].where(df["P5_19"].ne(98000))
+    df["gasto_mensual"] = df["P5_21"].where(df["P5_21"].ne(98000))
+    valid = df["ingreso_laboral_mensual"].ge(0).fillna(False) & df["gasto_mensual"].ge(0).fillna(False)
+    df["comparable_ingreso_gasto"] = valid
+    df["gasto_supera_ingreso_laboral"] = (
+        df["gasto_mensual"].gt(df["ingreso_laboral_mensual"]).astype("boolean").where(valid)
     )
-    df["gasta_mas_que_ingresa"] = df["tasa_ahorro"].lt(0).fillna(False)
     return df
 
 

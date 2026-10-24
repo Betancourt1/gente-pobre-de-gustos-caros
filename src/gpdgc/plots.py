@@ -64,7 +64,7 @@ def fig_h1_composicion(profile: pd.DataFrame) -> str:
     series = [
         ("share_d1", "D1. Discrecional amplio", "#30638e"),
         ("share_d2", "D2. Gusto visible", config.COLORS["young"]),
-        ("share_d3", "D3. Vicios", config.COLORS["accent"]),
+        ("share_d3", "D3. Alcohol, tabaco y narcóticos", config.COLORS["accent"]),
     ]
     for i, (col, label, color) in enumerate(series):
         vals = profile[col].to_numpy(dtype=float)
@@ -80,7 +80,7 @@ def fig_h1_composicion(profile: pd.DataFrame) -> str:
                     fontsize=8,
                 )
     ax.set_xticks(x, profile["grupo_edad"])
-    ax.set_ylabel("% del gasto total del hogar")
+    ax.set_ylabel("% del consumo monetario analizado")
     ax.yaxis.set_major_formatter(PercentFormatter(1.0))
     ax.set_title("Participación de las canastas no básicas")
     ax.set_ylim(0, max(profile[["share_d1", "share_d2", "share_d3"]].max()) * 1.28)
@@ -104,14 +104,14 @@ def fig_h1_composicion(profile: pd.DataFrame) -> str:
     for i, total in enumerate(profile["share_d2"].to_numpy(dtype=float)):
         if pd.notna(total):
             ax.text(i, total + 0.006, f"{total * 100:.1f}%", ha="center", va="bottom", fontsize=9, fontweight="bold")
-    ax.set_ylabel("% del gasto total del hogar")
+    ax.set_ylabel("% del consumo monetario analizado")
     ax.yaxis.set_major_formatter(PercentFormatter(1.0))
     ax.set_title("¿En qué se va el gasto visible?")
     ax.set_ylim(0, max(profile["share_d2"].max() * 1.32, bottom.max() * 1.25))
     ax.legend(loc="upper right", fontsize=7, ncol=1)
 
     fig.suptitle(
-        "H1. Los hogares jóvenes gastan una fracción algo mayor en gasto visible, sobre todo en restaurantes",
+        "H1. Participación y composición del gasto por edad del jefe o jefa",
         fontsize=14,
         fontweight="bold",
         y=1.02,
@@ -125,7 +125,7 @@ def fig_h2_decil(dec_share: pd.DataFrame, dec_level: pd.DataFrame) -> str:
     fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.2))
 
     for ax, data, col, ylabel, title in [
-        (axes[0], dec_share, "share_d2", "% del gasto total", "Participación del gasto visible"),
+        (axes[0], dec_share, "share_d2", "% del consumo monetario analizado", "Participación del gasto visible"),
         (axes[1], dec_level, "gasto_d2_eq", "MXN por adulto equivalente (trimestre)", "Nivel de gasto visible"),
     ]:
         for age in config.AGE_LABELS:
@@ -147,7 +147,7 @@ def fig_h2_decil(dec_share: pd.DataFrame, dec_level: pd.DataFrame) -> str:
     axes[0].yaxis.set_major_formatter(PercentFormatter(1.0))
 
     fig.suptitle(
-        "H2. La brecha por edad persiste en todos los deciles y se amplía en los altos",
+        "H2. Gasto visible por edad y decil de ingreso equivalente",
         fontsize=14,
         fontweight="bold",
         y=1.02,
@@ -163,8 +163,8 @@ def fig_h3_finanzas(fin: pd.DataFrame) -> str:
     ax = axes[0]
     indicators = [
         ("pct_afore", "Tiene AFORE"),
-        ("pct_ahorro", "Tiene ahorro"),
-        ("pct_deuda", "Tiene deuda"),
+        ("pct_reporta_ahorro_cuentas", "Reporta ahorro\nen cuentas"),
+        ("pct_deuda_credito", "Deuda o productos\nde crédito"),
         ("pct_ingreso_insuficiente", "Ingreso insuficiente"),
     ]
     x = np.arange(len(indicators))
@@ -186,7 +186,8 @@ def fig_h3_finanzas(fin: pd.DataFrame) -> str:
     ax = axes[1]
     x = np.arange(2)
     width = 0.2
-    indicators = [("pct_alto_estres", "Alto estrés financiero"), ("pct_gasta_mas", "Gasta más de lo que ingresa")]
+    indicators = [("pct_alto_estres", "Alto estrés financiero"),
+                  ("pct_gasto_supera_ingreso_laboral", "Gasto > ingreso laboral\n(solo casos comparables)")]
     for i, age in enumerate(config.AGE_LABELS):
         row = fin[fin["grupo_edad"].eq(age)].iloc[0]
         vals = [row[c] for c, _ in indicators]
@@ -197,17 +198,18 @@ def fig_h3_finanzas(fin: pd.DataFrame) -> str:
     ax.set_xticks(x, [label for _, label in indicators], fontsize=8)
     ax.set_ylabel("% de personas (18+)")
     ax.yaxis.set_major_formatter(PercentFormatter(1.0))
-    ax.set_ylim(0, max(fin[["pct_alto_estres", "pct_gasta_mas"]].max()) * 1.35)
-    ax.set_title("Estrés y desbalance")
+    ax.set_ylim(0, max(fin[["pct_alto_estres", "pct_gasto_supera_ingreso_laboral"]].max()) * 1.35)
+    ax.set_title("Estrés y comparación mensual de gasto e ingreso laboral")
     ax.legend(title="Edad", fontsize=8, title_fontsize=8)
 
     fig.suptitle(
-        "H3. Los jóvenes tienen menos AFORE, pero no más deuda ni estrés financiero",
+        "H3. Indicadores financieros por edad; no identifican cómo se financia el gasto visible",
         fontsize=14,
         fontweight="bold",
         y=1.02,
     )
-    return _save(fig, "h3_finanzas_ensafi.png", config.SOURCE_ENSAFI)
+    return _save(fig, "h3_finanzas_ensafi.png", config.SOURCE_ENSAFI +
+                 " Gasto/ingreso: solo montos conocidos; ingreso laboral, no total. Ahorro: en cuentas.")
 
 
 def fig_h4_pensiones_vivienda(exp: pd.DataFrame, housing: pd.DataFrame) -> str:
@@ -283,7 +285,7 @@ def fig_h4_pensiones_vivienda(exp: pd.DataFrame, housing: pd.DataFrame) -> str:
     ax.legend(h1 + h2, l1 + l2, loc="upper right", fontsize=7)
 
     fig.suptitle(
-        "H4. Los jóvenes esperan más pensión/AFORE y menos apoyo público, pero rentan mucho más",
+        "H4. Expectativas de retiro y situación de vivienda por edad",
         fontsize=14,
         fontweight="bold",
         y=1.02,
@@ -305,7 +307,8 @@ def fig_h5_concentracion(conc: dict) -> str:
     ax.legend(loc="upper left", fontsize=8)
     ax.annotate(
         f"Gini = {conc['gini_d2']:.2f}\nTop 10% = {conc['top10_d2'] * 100:.0f}%\nTop 20% = {conc['top20_d2'] * 100:.0f}%",
-        xy=(0.55, 0.08),
+        xy=(0.05, 0.65),
+        xycoords="axes fraction",
         fontsize=10,
         bbox=dict(boxstyle="round,pad=0.4", facecolor="white", edgecolor=config.COLORS["light"]),
     )
@@ -321,7 +324,7 @@ def fig_h5_concentracion(conc: dict) -> str:
     ax.set_ylim(0, by_age["share_gasto_d2_total"].max() * 1.25)
 
     fig.suptitle(
-        "H5. El gasto visible se concentra en una minoría; los jóvenes aportan solo 8% del total",
+        "H5. Concentración y distribución del gasto visible por edad",
         fontsize=14,
         fontweight="bold",
         y=1.02,
@@ -347,6 +350,6 @@ def fig_h1b_bienes(assets: pd.DataFrame) -> str:
     ax.set_ylabel("% de personas (18+)")
     ax.yaxis.set_major_formatter(PercentFormatter(1.0))
     ax.set_ylim(0, 1.0)
-    ax.set_title("Tenencia de bienes y servicios 'visibles' por edad")
+    ax.set_title("Personas que residen en viviendas con estos bienes y servicios")
     ax.legend(title="Edad", fontsize=8, title_fontsize=8)
     return _save(fig, "h1b_bienes_ensafi.png", config.SOURCE_ENSAFI)

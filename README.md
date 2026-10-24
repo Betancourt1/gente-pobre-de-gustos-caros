@@ -4,280 +4,239 @@
 
 He oído muchas veces que los jóvenes gastan una cantidad enorme de dinero en lujos innecesarios y luego se quejan de la falta de pensiones dignas, vivienda y otras desventuras. El argumento suele usarse para desestimar esos problemas y reducirlos a un asunto de administración personal.
 
-Este proyecto contrasta esa idea con microdatos de México. **La evidencia no respalda la caricatura.** Los hogares cuyo jefe o jefa tiene entre 18 y 29 años destinan una fracción algo mayor de su gasto a bienes y servicios "visibles" que los hogares de 60 años o más (18.8% vs. 13.3%, una diferencia de 5.5 puntos porcentuales), sobre todo a restaurantes. Pero no gastan más en vicios, no tienen más deuda ni más estrés financiero que los adultos de 30 a 44 años, y enfrentan una presión de vivienda mucho mayor: 41.1% renta, frente a 6.3% de los hogares de 60+.
+Este proyecto contrasta esa idea con microdatos de México. Los hogares cuyo jefe o jefa tiene entre 18 y 29 años destinan **17.0%** de su consumo monetario analizado a la canasta de gasto visible D2, frente a **12.8%** en hogares de 60 años o más: una diferencia de **4.25 puntos porcentuales**. Restaurantes y hoteles explica la mayor parte de esa diferencia.
 
-El "gusto caro" también está **muy concentrado**: el 10% de hogares con mayor gasto visible concentra 54% de ese gasto, y el 20% superior concentra 74%. No es una conducta exclusiva de una generación.
+El gasto visible está concentrado: el 10% de hogares que más gasta en D2 concentra **48.0%** del monto total, y el 20% concentra **66.2%**. Los hogares jóvenes representan 7.4% de los hogares analizados y 7.8% del gasto visible. Estas cifras no demuestran que ese consumo cause dificultades de vivienda o retiro.
 
-> **Alcance:** este análisis cubre únicamente México. No es una comparación entre países.
+> **Revisión del 23 de octubre de 2026:** se corrigieron cruces de identificadores, gastos personales omitidos, equivalencia del hogar, periodicidad del ingreso y otros cálculos. Las cifras de la primera publicación fueron sustituidas. El [informe de revisión](reports/revision_metodologica.md) documenta los errores, decisiones y resultados antes y después.
 
----
+## Resultado por hipótesis
 
-## Veredicto por hipótesis
-
-| Hipótesis | Veredicto | Evidencia principal |
+| Hipótesis | Resultado descriptivo | Qué permite afirmar |
 |---|---|---|
-| **H1.** Los jóvenes destinan una mayor proporción de su gasto a bienes no básicos. | **Se sostiene, con magnitud modesta** | D2: 18.8% en 18-29 vs. 13.3% en 60+ (5.5 p.p.). D1: 47.9% vs. 41.5%. |
-| **H2.** La diferencia persiste al comparar hogares con ingreso similar. | **Se sostiene** | La brecha joven − 60+ es positiva en los 10 deciles de ingreso; va de 2.9 a 8.3 p.p. y se amplía en los deciles altos. |
-| **H3.** Los jóvenes financian ese gasto con deuda o desahorro. | **No se sostiene** | Deuda: 40.1% en 18-29 vs. 48.8% en 30-44. Alto estrés: 28.6% vs. 40.5%. Gasta más de lo que ingresa: 33.2% vs. 41.5%. |
-| **H4.** Los jóvenes tienen menor cobertura de pensión y vivienda y aun así se quejan. | **Se sostiene la desventaja, no la queja infundada** | Renta: 41.1% de los hogares 18-29 vs. 6.3% de 60+. Espera pensión/AFORE: 58.9% vs. 38.4%. Espera apoyo de gobierno: 55.2% vs. 85.0%. |
-| **H5.** El gasto en "gustos caros" se concentra en una minoría. | **Se sostiene** | Gini de D2 = 0.73; top 10% = 54% del gasto visible; top 20% = 74%. |
+| **H1.** Los jóvenes destinan una mayor proporción de su gasto a bienes no básicos. | D2: 17.0% vs. 12.8% en 60+; D1: 49.5% vs. 44.3%. | Hay diferencias por edad bajo las canastas elegidas; no todo gasto seleccionado es prescindible. |
+| **H2.** La diferencia persiste entre hogares de ingreso similar. | La brecha joven − 60+ en D2 es positiva en los diez deciles: entre 2.46 y 6.19 p.p. | Estratificar por ingreso equivalente no elimina la brecha; no controla empleo, composición familiar ni otros factores. |
+| **H3.** Ese gasto se financia con deuda o desahorro. | **No identificada con estas fuentes.** | ENIGH y ENSAFI no vinculan las compras y su financiamiento en las mismas personas u hogares. |
+| **H4.** Hay desventajas de vivienda y pensión y las quejas son infundadas. | Renta: 41.1% en hogares jóvenes vs. 6.3% en 60+; existen diferencias de tenencia de AFORE y expectativas. | Se describen diferencias actuales. No se miden quejas, suficiencia pensionaria ni deterioro generacional. |
+| **H5.** El gasto visible se concentra en una minoría. | Gini D2: 0.651; top 10%: 48.0%; top 20%: 66.2%. | El gasto está concentrado. El ranking es por gasto D2, no por ingreso o patrimonio. |
 
-**Conclusión general:** hay un grano de verdad —los hogares jóvenes gastan relativamente más en restaurantes, recreación y otros bienes visibles—, pero el tamaño del fenómeno no permite explicar la precariedad de pensiones o vivienda. La evidencia es más compatible con una generación con menores ingresos, menor cobertura de ahorro para el retiro y mayor incidencia de renta que con una generación que dilapida su dinero.
+No hay una estimación causal de cuánto explican los hábitos de consumo de la situación de vivienda o retiro. Tampoco basta una brecha de gasto para atribuir esos problemas a decisiones personales.
 
----
+## Fuentes y universo
 
-## Fuentes y alcance
-
-| Fuente | Año | Universo utilizado | Ponderador |
+| Fuente | Año | Universo analizado | Ponderador |
 |---|---|---|---|
-| **ENIGH Nueva Serie** (INEGI) | 2024 | 91,414 hogares; 308,598 personas | `factor` |
-| **ENSAFI** (INEGI/CONDUSEF) | 2023 | 20,448 personas de 18 años o más | `FAC_ELE` |
+| ENIGH Nueva Serie, INEGI | 2024 | 91,380 hogares con jefatura de 18 años o más, de 91,414 en la fuente | `factor` |
+| ENSAFI, INEGI/CONDUSEF | 2023 | 20,448 personas de 18 años o más | `FAC_ELE` |
 
-- **ENIGH 2024** se usa para gasto, ingreso, composición del gasto y vivienda.
-- **ENSAFI 2023** se usa para deuda, ahorro, AFORE, estrés financiero, expectativas de retiro y tenencia de bienes.
-- La versión anterior de este README decía "ENSAFI 2024". Es un error: la encuesta disponible y utilizada es **ENSAFI 2023**.
-- Los microdatos crudos no se versionan en el repositorio porque el archivo de gastos de ENIGH pesa aproximadamente 552 MB.
-
----
-
-## Estructura del proyecto
-
-```text
-.
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── pdfs/                            # ocho papers de la bibliografía
-├── data/
-│   └── processed/                  # caché derivado (no se versiona)
-├── reports/
-│   ├── figures/                    # seis figuras PNG
-│   └── tables/                     # doce tablas CSV agregadas y auditables
-├── scripts/
-│   └── make_figures.py             # punto de entrada reproducible
-├── src/
-│   └── gpdgc/
-│       ├── __init__.py
-│       ├── config.py               # rutas, grupos de edad, colores
-│       ├── taxonomy.py             # definición de canastas D1/D2/D3
-│       ├── io.py                   # lectura y limpieza de ENIGH/ENSAFI
-│       ├── weights.py              # media, cuantiles, Gini, Lorenz, top shares
-│       ├── analysis.py             # tablas H1-H5
-│       └── plots.py                # figuras
-└── tests/
-    └── test_core.py                # pruebas de canastas y ponderadores
-```
-
-No se usan notebooks. Todo el análisis vive en módulos de Python y se ejecuta con un script.
-
----
+- ENIGH aporta ingreso, consumo, composición familiar y vivienda. Se integran **gastoshogar y gastospersona** por hogar.
+- ENSAFI aporta tenencia de cuentas y productos de crédito, estrés, gasto e ingreso laboral declarados y expectativas de retiro.
+- Se excluyen 34 hogares ENIGH con jefatura menor de 18 de todos los perfiles, deciles y medidas nacionales.
+- Grupos de edad: **18–29, 30–44, 45–59 y 60+**. La edad del jefe representa al hogar ENIGH, no a cada consumidor.
+- El alcance geográfico es México. Las fuentes no se unen entre sí y no constituyen un panel.
 
 ## Metodología
 
-### 1. Unidad de análisis y grupos de edad
+### Canastas de gasto
 
-- **ENIGH:** el gasto se observa a nivel hogar. La edad se asigna con la **edad del jefe o jefa del hogar**, porque la encuesta no permite atribuir cada consumo a una persona específica.
-- **ENSAFI:** las variables financieras y de expectativas son individuales; se usan personas de 18 años o más.
-- Grupos: **18-29, 30-44, 45-59 y 60+**.
-- Esta decisión es conservadora para la hipótesis: un hogar con jefe/a joven puede incluir personas de otras edades, y un hogar con jefe/a mayor puede incluir jóvenes. Si el estereotipo fuera cierto, la comparación por edad del jefe/a debería mostrarlo; no lo hace con la fuerza que sugiere el relato.
+Se selecciona consumo monetario para el propio hogar: tipo G1 de las dos tablas de gastos. Se excluyen capítulo 17 y regalos T9. Las participaciones se calculan sobre ese consumo seleccionado, no sobre todo el ingreso ni directamente sobre `gasto_mon`.
 
-### 2. Canastas de gasto
-
-La ENIGH clasifica cada renglón con una clave de seis dígitos. Los dos primeros dígitos identifican el capítulo de la COICOP adaptada por el INEGI. Para no depender de una sola definición normativa, se reportan tres canastas:
-
-| Canasta | Definición | Capítulos / claves |
+| Canasta | Definición operativa | Capítulos o claves |
 |---|---|---|
-| **D1. Discrecional amplio** | Todo gasto no básico o fácilmente postergable | 02, 05, 07, 08, 09, 11, 12, 13 |
-| **D2. Gusto visible** | Gasto con alta visibilidad social: salir, viajar, alcohol, accesorios, streaming y auto nuevo | 02, 09, 11; joyería/bisutería (`1321`), bolsos (`1329`), streaming/TV de paga (`081404`, `083921`-`083924`) y auto nuevo (`071110`) |
-| **D3. Vicios** | Alcohol, tabaco y narcóticos | 02 |
+| **D1. Discrecional amplio** | Canasta amplia de sensibilidad; incluye gastos que pueden ser necesarios. | 02, 05, 07, 08, 09, 11, 12 y 13 |
+| **D2. Gasto visible** | Aproximación a recreación, salidas, accesorios seleccionados, servicios digitales y automóvil nuevo. | 02, 09 y 11; accesorios `132111`, `132112`, `132911`, `132912`, `132913`, `132915`; digital `081404`, `083921`–`083924`; auto nuevo `071110` |
+| **D3. Alcohol, tabaco y narcóticos** | Canasta restringida del capítulo 02. | 02 |
 
-- **D2 es la medida principal** porque se acerca más a lo que el argumento cotidiano llama "gusto caro".
-- **D3** se incluye como prueba de la versión más moralista del relato: si el problema fueran los vicios, debería aparecer una brecha clara. No aparece.
-- Se excluyen el capítulo **17** (transferencias y erogaciones, que no son consumo) y **T9** (regalos a terceros).
-- La definición exacta está en [`src/gpdgc/taxonomy.py`](src/gpdgc/taxonomy.py).
+D2 no incluye automáticamente todos los bolsos, efectos personales o artículos de los prefijos 1321 y 1329. Se excluyen de esa canasta artículos funerarios, para bebé, mochilas y otros objetos no listados. La sección digital también incluye equipos de transmisión y ciertos alquileres de soportes o software. La [taxonomía](src/gpdgc/taxonomy.py) contiene la selección exacta; el [informe](reports/revision_metodologica.md) explica sus límites. Visible, costoso y prescindible no son equivalentes.
 
-### 3. Ponderación e ingreso equivalente
+### Ponderación y composición familiar
 
-- Todas las estimaciones usan el factor de expansión (`factor` en ENIGH, `FAC_ELE` en ENSAFI).
-- Los deciles de ingreso se construyen con **ingreso corriente equivalente**, usando la escala de equivalencia OCDE modificada: `1 + 0.5 × (adultos − 1) + 0.3 × menores`.
-- El gasto por adulto equivalente usa la misma escala.
-- Las medias y participaciones son ponderadas; los cuantiles se calculan sobre pesos acumulados.
+- Se usan factores de expansión. Las participaciones por edad son **medias ponderadas de las proporciones de cada hogar**, no cocientes entre sumas nacionales.
+- La escala OCDE modificada es `1 + 0.5 × (personas de 14 o más − 1) + 0.3 × menores de 14`. El conteo se construye desde población, excluyendo trabajadores domésticos, sus familiares y huéspedes, como en `tot_integ`.
+- Ingreso y gasto equivalentes se obtienen dividiendo por esa escala. Los montos ENIGH son trimestrales.
+- Los deciles se calculan en el universo de jefaturas adultas, con ingreso corriente equivalente y ponderadores de hogar. Los empates permanecen juntos y pueden dejar grupos vacíos.
+- Los cuantiles usan la inversa de la distribución empírica ponderada, sin interpolación. El top de gasto incluye solo la fracción del peso del registro que alcanza el corte.
+- Los hogares con consumo seleccionado cero permanecen en niveles y concentración; quedan fuera de medias de participaciones por tener denominador cero.
 
-### 4. Validación
+### Indicadores financieros ENSAFI
 
-- `gasto_total_g1` (suma de consumo analizado) equivale a una **mediana de 87.4%** de `gasto_mon` (gasto monetario oficial), porque excluye el capítulo 17 y los regalos. Las participaciones se calculan sobre el total analizado, no sobre `gasto_mon`.
-- La renta de ENIGH es **mensual** y el ingreso es **trimestral**; la carga de renta se calcula como `renta × 3 / ing_cor`.
-- ENSAFI usa `EDAD_V`, no `EDAD`, porque la primera es la variable validada de edad.
+`P5_19` no es necesariamente mensual. Se utiliza **INGRESO_M**, ingreso mensual **por trabajo**, y se compara con el gasto mensual `P5_21`. Se excluyen montos desconocidos o abiertos de 98,000 y más. Los ceros conocidos se conservan.
 
----
+El indicador **gasto mayor al ingreso laboral mensual** usa solo casos comparables. No mide desahorro: una persona puede financiar su gasto con pensión, transferencias u otros ingresos no incluidos en el ingreso laboral. El CSV publica tanto el número de casos comparables como su cobertura ponderada.
+
+“Deuda o productos de crédito” combina P6.5 y P6.6: tener tarjeta de crédito no demuestra un saldo pendiente. “Reporta ahorro en cuentas” no incluye ahorro informal. “Reporta atraso” es incidencia sobre todos los adultos, no tasa entre deudores. Tener AFORE no prueba cotización activa ni pensión suficiente.
+
+### Cruces y conciliación
+
+Los identificadores se leen como texto para preservar ceros iniciales. El proceso valida cardinalidad, correspondencia de viviendas, integrantes del hogar y claves de gastos sin hogar. Los componentes de D2 deben sumar su total y debe cumplirse `0 <= D3 <= D2 <= D1 <= consumo`.
+
+Hay **91,333 hogares** con registros de consumo seleccionado y **47 sin ellos** en el universo adulto. La mediana de consumo seleccionado / gasto monetario oficial es **99.76%**, entre hogares con `gasto_mon > 0`. Esa cercanía no implica igualdad de conceptos ni conciliación exacta registro por registro.
+
+La renta es mensual y el ingreso ENIGH trimestral: se usa `renta × 3 / ing_cor`. En viviendas con varios hogares, la renta de la vivienda no equivale al pago individual del hogar; hay 214 hogares analizados en esa situación de renta. El cociente debe interpretarse como aproximación.
 
 ## Hallazgos
 
-### H1. Los hogares jóvenes gastan una fracción algo mayor en bienes no básicos
+### H1. Composición del consumo por edad
 
-![H1: composición del gasto por edad](reports/figures/h1_composicion_por_edad.png)
+![H1: composición del gasto](reports/figures/h1_composicion_por_edad.png)
 
-- **D2 (gusto visible):** 18.8% del gasto en hogares 18-29, 18.0% en 30-44, 16.2% en 45-59 y 13.3% en 60+. La brecha joven − 60+ es de **5.5 p.p.**
-- **D1 (discrecional amplio):** 47.9% vs. 41.5% en 60+; brecha de **6.5 p.p.**
-- **D3 (vicios):** 0.68% vs. 0.56% en 60+. Prácticamente no hay diferencia. **El relato de "se gastan todo en alcohol y tabaco" no se sostiene.**
-- **Composición de D2 en 18-29:** restaurantes y hoteles 12.9 p.p., recreación 3.6 p.p., alcohol/tabaco 0.7 p.p., accesorios personales 0.4 p.p., streaming/TV de paga 0.7 p.p. y auto nuevo 0.4 p.p.
-- El gasto visible por adulto equivalente es de **4,578 MXN trimestrales** en 18-29 vs. **2,564 MXN** en 60+.
-- Al mismo tiempo, los hogares jóvenes destinan menos a alimentos (27.7% vs. 35.5%) y a salud (2.2% vs. 4.8%), y más a vivienda (12.8% vs. 10.4%). No es que "no gasten en lo básico"; es que tienen una estructura de gasto distinta.
+| Grupo | D1 | D2 | D3 | D2 por adulto equivalente, MXN trimestrales |
+|---|---:|---:|---:|---:|
+| 18–29 | 49.5% | 17.0% | 0.66% | 5,959 |
+| 30–44 | 48.4% | 16.5% | 0.53% | 5,527 |
+| 45–59 | 48.1% | 14.8% | 0.53% | 4,580 |
+| 60+ | 44.3% | 12.8% | 0.53% | 3,681 |
 
-**Lectura:** la hipótesis tiene sustento, pero el efecto es de unos **5.5 puntos porcentuales**, no de una orgía de lujos. Restaurantes explica la mayor parte de la diferencia.
+La brecha joven − 60+ es **4.25 p.p. en D2** y **5.22 p.p. en D1**. D3 presenta una diferencia de 0.13 p.p.; no se ha realizado una prueba de significancia.
 
-### H1b. Los jóvenes no declaran más bienes "visibles" que los adultos
+En jóvenes, D2 se compone de restaurantes y hoteles (11.94 p.p.), recreación (3.33), alcohol/tabaco (0.66), accesorios seleccionados (0.11), agrupación digital (0.64) y auto nuevo (0.34). Restaurantes puede incluir comidas necesarias por trabajo. Estos resultados no identifican una preferencia generacional por el lujo.
 
-![H1b: tenencia de bienes y servicios](reports/figures/h1b_bienes_ensafi.png)
+### H1b. Bienes y servicios de la vivienda
 
-- **Automóvil:** 47.0% en 18-29 vs. 53.7% en 45-59.
-- **Internet:** 81.0% en 18-29 vs. 65.6% en 60+.
-- **TV de paga:** 40.6% vs. 46.0% en 45-59.
-- **Streaming:** 30.3% vs. 19.0% en 60+.
+![H1b: equipamiento de la vivienda](reports/figures/h1b_bienes_ensafi.png)
 
-**Lectura:** hay más adopción de servicios digitales entre jóvenes, pero no una tenencia superior de bienes durables costosos. El estereotipo del joven con auto nuevo y televisión de paga no aparece en los datos.
+El 47.0% de las personas de 18–29 vive en una vivienda con automóvil, frente al 53.7% de quienes tienen 45–59 años. Internet alcanza 81.0% entre jóvenes y 65.6% entre mayores de 60; streaming, 30.3% y 19.0%, respectivamente.
 
-### H2. La brecha por edad persiste dentro de cada decil de ingreso
+Son características de la vivienda de residencia, no prueba de propiedad personal, de quién pagó el bien ni de que el automóvil sea nuevo.
 
-![H2: brecha por decil](reports/figures/h2_brecha_por_decil.png)
+### H2. Diferencias dentro de los deciles
 
-- La participación de D2 en los hogares 18-29 es mayor que en los hogares 60+ **en los 10 deciles**.
-- La brecha va de **2.9 p.p.** (decil 2) a **8.3 p.p.** (decil 10). No es un artefacto de que los jóvenes tengan más ingreso: se amplía en la parte alta.
-- En el decil 1, los jóvenes destinan 11.4% a D2 vs. 7.4% de los 60+.
-- En el decil 10, 29.8% vs. 21.5%.
-- El **nivel** de gasto visible por adulto equivalente también es mayor entre jóvenes en todos los deciles: desde 886 MXN vs. 595 MXN en el decil 1 hasta 15,245 MXN vs. 8,281 MXN en el decil 10.
+![H2: gasto por decil](reports/figures/h2_brecha_por_decil.png)
 
-**Lectura:** no es solo un efecto de composición por ingreso. La diferencia por edad existe dentro de estratos comparables. La hipótesis se sostiene.
+D2 es mayor en hogares de 18–29 que en los de 60+ en los diez deciles. La brecha mínima es **2.46 p.p. en el decil 2** y la máxima **6.19 p.p. en el decil 5**; no crece de forma monotónica con el ingreso.
 
-### H3. Los jóvenes no están más endeudados ni más estresados que los adultos de 30-44
+En el decil 1, las participaciones son 9.6% y 6.5%; en el decil 10, 26.8% y 21.0%. Los montos equivalentes respectivos son $1,120 y $696 en el primer decil, y $21,706 y $13,862 en el décimo.
+
+La persistencia dentro de deciles es descriptiva. No controla diferencias de empleo, urbanización, patrimonio, salud o composición familiar.
+
+### H3. Finanzas personales y alcance de la comparación
 
 ![H3: finanzas personales](reports/figures/h3_finanzas_ensafi.png)
 
-- **AFORE:** 14.4% en 18-29, 22.9% en 30-44, 22.7% en 45-59 y 6.3% en 60+. Los jóvenes tienen baja cobertura, pero los 60+ también, por razones históricas.
-- **Deuda:** 40.1% en 18-29 vs. 48.8% en 30-44 y 28.4% en 60+.
-- **Atraso en pagos:** 10.1% vs. 12.3% en 30-44.
-- **Alto estrés financiero:** 28.6% vs. 40.5% en 30-44 y 35.8% en 60+.
-- **Gasta más de lo que ingresa:** 33.2% vs. 41.5% en 30-44 y 19.6% en 60+.
-- **Ingreso mensual mediano:** 2,200 MXN en 18-29 vs. 3,200 MXN en 30-44 y 2,000 MXN en 60+.
+| Indicador | 18–29 | 30–44 | 45–59 | 60+ |
+|---|---:|---:|---:|---:|
+| Tiene AFORE | 14.4% | 22.9% | 22.7% | 6.3% |
+| Deuda o productos de crédito | 40.1% | 48.8% | 46.6% | 28.4% |
+| Reporta atraso, sobre todos los adultos | 10.1% | 12.3% | 11.4% | 4.8% |
+| Alto estrés financiero | 28.6% | 40.5% | 41.8% | 35.8% |
+| Gasto > ingreso laboral mensual, solo comparables | 17.8% | 22.7% | 25.3% | 34.5% |
+| Cobertura ponderada de casos comparables | 64.0% | 76.0% | 68.7% | 38.3% |
+| Número de casos comparables | 2,942 | 4,750 | 3,737 | 1,796 |
+| Ingreso laboral mensual mediano, conocido y no topado | $6,450 | $7,740 | $6,880 | $4,800 |
 
-**Lectura:** los jóvenes tienen menos colchón financiero y menor cobertura de AFORE, pero **no** presentan más deuda, más atraso ni más estrés que los adultos en edad productiva. La idea de que el gasto visible se financia con deuda juvenil no se sostiene con estos datos. La desventaja principal es de **ingreso y cobertura**, no de impulsividad financiera.
+Las primeras cuatro filas utilizan el universo adulto de cada edad. La comparación de gasto e ingreso usa **13,225 casos** en total y no es representativa de quienes carecen de información comparable sin supuestos adicionales. La mediana de ingreso usa su propio conjunto de respuestas válidas.
 
-### H4. La desventaja de vivienda y pensión es real; la queja no es infundada
+Los jóvenes reportan menor incidencia de crédito y estrés que los adultos de 30–44. Eso **no prueba ni refuta que su gasto visible se financie con deuda**. No se observa D2 y su financiamiento conjuntamente; tampoco puede interpretarse la comparación con ingreso laboral como tasa de ahorro.
 
-![H4: pensiones y vivienda](reports/figures/h4_pensiones_vivienda.png)
+### H4. Vivienda y expectativas de retiro
 
-- **Hogares que rentan:** 41.1% en 18-29, 23.6% en 30-44, 12.3% en 45-59 y 6.3% en 60+.
-- **Carga de renta mediana (solo rentadores):** 13.4% del ingreso en 18-29 vs. 17.0% en 60+. La incidencia de renta es mucho mayor entre jóvenes, aunque quienes rentan a los 60+ destinan una fracción algo mayor de su ingreso.
-- **Espera pensión, jubilación o AFORE:** 58.9% en 18-29 vs. 38.4% en 60+.
-- **Espera apoyo de gobierno:** 55.2% en 18-29 vs. 85.0% en 60+.
-- **Espera seguir trabajando:** 72.5% en 18-29 vs. 35.3% en 60+.
-- **Tiene vivienda como meta:** 37.4% en 18-29 vs. 21.5% en 60+.
+![H4: vivienda y retiro](reports/figures/h4_pensiones_vivienda.png)
 
-**Lectura:** los jóvenes no son más dependientes de la pensión pública que los mayores; de hecho, esperan más pensión/AFORE y mucho menos apoyo gubernamental. Pero **sí** enfrentan una incidencia de renta casi siete veces mayor que los hogares de 60+ y una baja cobertura de ahorro para el retiro. La preocupación por vivienda y pensión está materialmente fundada. Lo que no se sostiene es la idea de que se quejan mientras derrochan.
+Renta el 41.1% de hogares jóvenes, frente a 23.6% de los de 30–44, 12.3% de los de 45–59 y 6.3% de los de 60+. La mediana de renta / ingreso entre rentadores es 13.4% entre jóvenes y 17.0% entre mayores.
 
-### H5. El gasto visible se concentra en una minoría, no en una generación
+En ENSAFI, espera recibir pensión, jubilación o AFORE el 58.9% de jóvenes y el 38.4% de mayores; espera apoyo de gobierno el 55.2% y el 85.0%; espera seguir trabajando el 72.5% y el 35.3%. Las respuestas no son excluyentes. Vivienda como meta —comprar/pagar o remodelar/mejorar— corresponde al 37.4% y al 21.5%.
 
-![H5: concentración del gasto visible](reports/figures/h5_concentracion.png)
+La incidencia de renta y las expectativas son hechos descriptivos. No miden por sí solos deterioro generacional, capacidad de compra, dependencia efectiva del gobierno ni suficiencia futura de pensiones. La valoración de las quejas requiere un argumento adicional.
 
-- **Gini de D2:** 0.73.
-- **Top 10% de hogares:** concentra **54%** del gasto visible.
-- **Top 20%:** concentra **74%**.
-- **Top 20% dentro de cada grupo de edad:** 71.6% en 18-29, 69.7% en 30-44, 73.0% en 45-59 y 78.7% en 60+.
-- Los hogares 18-29 son **7.4%** de los hogares, pero concentran **8.2%** del gasto visible total. Los hogares 60+ son 31.9% de los hogares y concentran 24.0% del gasto visible.
+### H5. Concentración del gasto visible
 
-**Lectura:** el gasto visible es un fenómeno de minorías acomodadas en **todas** las edades. Los jóvenes están ligeramente sobrerrepresentados (8.2% del gasto vs. 7.4% de los hogares), pero la mayor parte del gasto visible del país no viene de ellos. Atribuir el fenómeno a "los jóvenes" oculta la concentración de ingreso y gasto.
+![H5: concentración](reports/figures/h5_concentracion.png)
 
----
+- **Gini D2:** 0.651.
+- **Top 10% por gasto D2:** 48.0% del monto total.
+- **Top 20%:** 66.2%.
+- **Top 20% dentro de cada edad:** 63.0% en 18–29, 62.4% en 30–44, 65.8% en 45–59 y 71.1% en 60+.
+- Los hogares jóvenes son 7.4% de los hogares analizados y aportan 7.8% de D2; los de 60+ son 31.9% y aportan 24.8%.
+
+El gasto está concentrado en todos los grupos. No se deduce que quienes más gastan sean necesariamente los más ricos ni que los demás hogares estén libres de presión social para consumir.
 
 ## Limitaciones
 
-1. **No es causal.** Todas las estimaciones son descriptivas y transversales. No se puede concluir que la edad "cause" el gasto, ni que el gasto cause endeudamiento o malestar.
-2. **Edad del jefe/a en ENIGH.** El gasto se atribuye al hogar, no a la persona. Un hogar joven puede incluir personas mayores y viceversa. Esto atenúa las diferencias y hace que los resultados sean conservadores.
-3. **Canastas normativas.** D1, D2 y D3 son definiciones analíticas discutibles. Por eso se reportan tres versiones y se documentan las claves exactas. Restaurantes puede incluir comidas necesarias por trabajo; vivienda incluye servicios y combustibles.
-4. **Subreporte y diseño muestral.** ENIGH y ENSAFI tienen subreporte, especialmente en alcohol, gastos irregulares y deuda. No se calcularon errores estándar ni intervalos de confianza; las cifras son estimaciones puntuales ponderadas.
-5. **ENSAFI mide percepciones y autopercepción.** "Alto estrés" y "gasta más de lo que ingresa" dependen de lo que la persona declara.
-6. **Comparación de ingresos entre fuentes.** ENIGH y ENSAFI tienen universos y preguntas distintas; no se mezclan en una misma estimación, solo se presentan lado a lado.
-7. **Cobertura geográfica.** Solo México. No hay datos de otros países en este repositorio.
+1. Análisis transversal y descriptivo: edad, cohorte y periodo no se separan. No hay identificación causal.
+2. La edad de la jefatura no identifica la edad de quien realiza cada compra. No se presume que el sesgo sea conservador.
+3. Las canastas son normativas: trabajo, transporte y cuidados pueden requerir gastos incluidos en ellas.
+4. No se calcularon errores estándar ni intervalos con estratos y UPM. Las diferencias puntuales no son pruebas estadísticas.
+5. Hay subreporte, montos desconocidos y saltos de cuestionario. ENSAFI no ofrece aquí una cuenta completa de ingreso y ahorro.
+6. ENIGH y ENSAFI tienen universos y conceptos distintos. El ingreso corriente ENIGH incluye componentes no monetarios.
+7. La carga de renta es aproximada en viviendas con varios hogares y no mide asequibilidad de compra.
+8. Concentración de gasto no equivale a concentración de riqueza.
 
----
+## Estructura
+
+~~~text
+.
+├── README.md
+├── requirements.txt
+├── pdfs/                         # ocho papers
+├── data/processed/               # cachés locales, fuera de Git
+├── reports/
+│   ├── revision_metodologica.md  # errores, decisiones y antes/después
+│   ├── figures/                  # seis figuras
+│   └── tables/                   # trece CSV agregados
+├── scripts/make_figures.py       # reconstrucción desde fuentes
+├── src/gpdgc/                    # lectura, canastas, estadísticas y gráficos
+└── tests/                        # pruebas con datos sintéticos
+~~~
 
 ## Reproducción
 
-```bash
+Requiere Python 3.11 o posterior. Clona el repositorio e instala dependencias:
+
+~~~bash
 git clone git@github.com:Betancourt1/gente-pobre-de-gustos-caros.git
 cd gente-pobre-de-gustos-caros
 python -m pip install -r requirements.txt
+~~~
 
-# Primera ejecución: construye el caché de gastos (~552 MB de CSV -> parquet)
-python scripts/make_figures.py
+Descarga los CSV de [ENIGH 2024](https://www.inegi.org.mx/programas/enigh/nc/2024/) y [ENSAFI 2023](https://www.inegi.org.mx/programas/ensafi/2023/). Descomprime conservando subcarpetas, en la raíz del proyecto:
 
-# Si se quiere reconstruir el caché desde cero
-python scripts/make_figures.py --force-gastos
-```
-
-Los datos crudos deben colocarse en la raíz del repositorio con estos nombres:
-
-```text
+~~~text
 conjunto_de_datos_enigh2024_ns_csv/
 conjunto_de_datos_ensafi_2023_csv/
-```
+~~~
 
-Se pueden descargar de los sitios de INEGI:
+Se necesitan `concentradohogar`, `poblacion`, `viviendas`, `gastoshogar` y **gastospersona** de ENIGH, y `tmodulo` y `tvivienda` de ENSAFI. Las rutas exactas están en [config.py](src/gpdgc/config.py).
 
-- ENIGH 2024 Nueva Serie: <https://www.inegi.org.mx/programas/enigh/nc/2024/>
-- ENSAFI 2023: <https://www.inegi.org.mx/programas/ensafi/2023/>
+~~~bash
+python -m unittest discover -s tests -v
+python scripts/make_figures.py --force-gastos
 
-Descarga los conjuntos CSV de microdatos y descomprímelos conservando sus subcarpetas. Las rutas exactas están en [`src/gpdgc/config.py`](src/gpdgc/config.py). El proceso utiliza `concentradohogar`, `poblacion`, `viviendas` y `gastoshogar` de ENIGH, y `tmodulo` y `tvivienda` de ENSAFI. No requiere una caché previa: crea `data/processed/` al construir el agregado de gastos.
+# Ejecuciones posteriores: reutiliza la caché si las fuentes y su código no cambiaron.
+python scripts/make_figures.py
+~~~
 
-### Qué se publica y cómo ampliar el análisis
+No se necesita una caché previa. La reconstrucción crea `data/processed/gastos_consumo_g1_v2.parquet`, trece CSV y seis PNG. Las pruebas sintéticas no requieren descargar las encuestas.
 
-El repositorio incluye código, bibliografía en PDF, figuras y CSV agregados de `reports/tables/`. Los microdatos completos, los ZIP de descarga con nombre `conjunto_de_datos_*` y las cachés Parquet quedan excluidos mediante `.gitignore`. Los CSV publicados no contienen registros individuales ni identificadores de hogares o personas.
+### Datos publicados y cómo ampliar el análisis
 
-`python scripts/make_figures.py --force-gastos` reconstruye las doce tablas y las seis figuras a partir de los microdatos de origen. Las funciones `load_enigh_hogares()` y `load_ensafi_personas()` de [`src/gpdgc/io.py`](src/gpdgc/io.py) preparan las bases analíticas locales para realizar cruces adicionales; no unen personas de una encuesta con hogares de la otra.
+Se publican código, bibliografía, figuras y tablas agregadas. Los microdatos completos, ZIP con prefijo `conjunto_de_datos_` y cachés Parquet quedan excluidos por [.gitignore](.gitignore). Los CSV publicados no contienen registros ni identificadores individuales.
 
-Tres CSV complementan las tablas originales para ampliar la discusión sin publicar el dataset:
-
-| Archivo en `reports/tables/` | Contenido y uso |
+| Tabla en reports/tables/ | Contenido |
 |---|---|
-| `h2_sensibilidad_canastas_por_decil.csv` | 40 combinaciones de edad y decil de ingreso equivalente, con tamaño de muestra `n` y medias ponderadas de las participaciones D1, D2 y D3. Permite comprobar cuánto depende la brecha de la canasta elegida. |
-| `h5_concentracion_nacional.csv` | Gini de D1 y D2, participación del 10% superior en ambas canastas y del 20% superior en D2. Los hogares se ordenan por gasto en la canasta correspondiente, no por ingreso. |
-| `h5_curva_lorenz_d2.csv` | 200 puntos interpolados de la curva de Lorenz ponderada de D2, ordenando hogares de menor a mayor gasto visible. Permite reproducir la curva; el Gini publicado se calcula sobre los datos originales, no sobre estos puntos interpolados. |
+| h1_perfil_hogares.csv | Niveles y composición del consumo por edad |
+| h1b_bienes_ensafi.csv | Equipamiento de la vivienda de residencia |
+| h2_share_d2_por_decil.csv | Participación D2 por edad y decil |
+| h2_nivel_d2_por_decil.csv | Monto equivalente D2 por edad y decil |
+| h2_sensibilidad_canastas_por_decil.csv | D1, D2 y D3 para 40 combinaciones de edad y decil |
+| h3_finanzas_ensafi.csv | Indicadores financieros y denominadores de la comparación mensual |
+| h4_vivienda_por_edad.csv | Incidencia y carga de renta |
+| h4_expectativas_ensafi.csv | Fuentes previstas de retiro y meta de vivienda |
+| h5_concentracion_por_edad.csv | Concentración y distribución por edad |
+| h5_concentracion_nacional.csv | Gini y participaciones de los grupos de mayor gasto |
+| h5_curva_lorenz_d2.csv | 200 puntos interpolados de la curva; el Gini usa los datos completos |
+| hallazgos_clave.csv | Selección de contrastes principales |
+| validacion_datos.csv | Cobertura, exclusiones y conciliación con gasto oficial |
 
-Las participaciones y cargas se exportan en escala proporcional (0.15 representa 15%); una carga puede superar 1. Los coeficientes de Gini usan escala de 0 a 1. Los indicadores rotulados en puntos porcentuales y las columnas `peso_pct` ya están multiplicados por 100. Los montos ENIGH son pesos trimestrales y los montos ENSAFI indicados como mensuales son pesos mensuales. `n` es el número de observaciones sin expandir. Las tablas permiten comparaciones descriptivas; no incluyen errores estándar ni intervalos de confianza.
+Las participaciones usan escala proporcional: 0.15 significa 15%. `peso_pct` y los contrastes rotulados en puntos porcentuales ya están multiplicados por 100. Los montos ENIGH son pesos trimestrales; los montos ENSAFI, mensuales. `n` es número de observaciones sin expandir del grupo, no necesariamente el número válido de cada indicador.
 
-Para correr las pruebas:
+Para nuevos cruces, [io.py](src/gpdgc/io.py) prepara las bases analíticas locales y [analysis.py](src/gpdgc/analysis.py) produce las tablas. El [informe de revisión](reports/revision_metodologica.md) documenta las columnas ENSAFI reemplazadas y las precauciones de interpretación.
 
-```bash
-python -m unittest discover -s tests
-```
+## Qué falta para evaluar el argumento causal
 
-### Salidas generadas
-
-| Figura | Archivo |
-|---|---|
-| H1. Composición del gasto | `reports/figures/h1_composicion_por_edad.png` |
-| H1b. Bienes y servicios | `reports/figures/h1b_bienes_ensafi.png` |
-| H2. Brecha por decil | `reports/figures/h2_brecha_por_decil.png` |
-| H3. Finanzas personales | `reports/figures/h3_finanzas_ensafi.png` |
-| H4. Pensiones y vivienda | `reports/figures/h4_pensiones_vivienda.png` |
-| H5. Concentración | `reports/figures/h5_concentracion.png` |
-
-Las tablas que respaldan cada figura están en `reports/tables/`, incluida `hallazgos_clave.csv`.
+Haría falta observar consumo y financiamiento conjuntamente, comparar cohortes a edades equivalentes y estimar un contrafactual de acumulación: cuánto cambiarían el patrimonio, acceso a vivienda o retiro bajo otro patrón de gasto. La diferencia observada en D2 no basta para calcular ese efecto.
 
 ---
 
-## Qué haría falta para sostener la hipótesis original
-
-Para afirmar que los jóvenes "se gastan todo en lujos y por eso no tienen pensión ni vivienda" haría falta, como mínimo:
-
-1. Que la brecha de gasto visible fuera mucho mayor que 5.5 p.p. y que explicara una parte relevante del ingreso.
-2. Que los jóvenes tuvieran más deuda, más atraso o más desahorro que los adultos; no ocurre.
-3. Que la falta de vivienda y pensión se debiera principalmente a decisiones de consumo y no a ingresos, cobertura laboral, informalidad y precios de vivienda; los datos no permiten esa conclusión.
-4. Que el fenómeno estuviera localizado en los jóvenes; en realidad está concentrado en minorías de todos los grupos de edad.
-
-La hipótesis original contiene un grano de verdad sobre patrones de consumo, pero **no alcanza para explicar ni para desestimar** los problemas estructurales de vivienda y pensiones.
-
----
 
 ## Bibliografía comentada
 

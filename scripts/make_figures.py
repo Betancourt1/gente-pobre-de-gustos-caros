@@ -2,7 +2,7 @@
 
 Uso:
     python scripts/make_figures.py
-    python scripts/make_figures.py --force-gastos   # reconstruye el caché de 552 MB
+    python scripts/make_figures.py --force-gastos   # reconstruye desde ambas fuentes
 """
 
 from __future__ import annotations
@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
 from gpdgc import analysis, config, plots  # noqa: E402
@@ -58,6 +59,30 @@ def main() -> None:
     assets = analysis.ensafi_assets(ensafi, viv)
     findings = analysis.key_findings(profile, fin, exp)
 
+    # Estos controles verifican magnitudes, además de que el proceso termine.
+    baskets = enigh[["gasto_d3", "gasto_d2", "gasto_d1", "gasto_total_g1"]].to_numpy(dtype=float)
+    if not (np.isfinite(baskets).all() and (baskets >= 0).all()
+            and (np.diff(baskets, axis=1) >= -1e-8).all()):
+        raise ValueError("Las canastas no cumplen 0 <= D3 <= D2 <= D1 <= consumo")
+    components = enigh.filter(regex=r"^gasto_d2_(alcohol|restaurantes|recreacion|personal|streaming|auto)$")
+    if not np.allclose(components.sum(axis=1), enigh["gasto_d2"]):
+        raise ValueError("Los componentes de D2 no concilian con la canasta")
+    if not np.isclose(conc["by_age"]["share_gasto_d2_total"].sum(), 1):
+        raise ValueError("La distribución por edad no suma el gasto nacional")
+    validation = pd.DataFrame([
+        ("hogares_fuente", enigh.attrs["hogares_fuente"]),
+        ("hogares_excluidos_edad", enigh.attrs["hogares_excluidos_edad"]),
+        ("hogares_analizados", len(enigh)),
+        ("hogares_con_registros_gasto", int(enigh["tiene_registros_gasto"].sum())),
+        ("hogares_sin_registros_gasto", int((~enigh["tiene_registros_gasto"]).sum())),
+        ("hogares_con_consumo_positivo", int(enigh["gasto_total_g1"].gt(0).sum())),
+        ("hogares_renta_multihogar", int((enigh["es_rentado"] & enigh["tot_hog"].gt(1)).sum())),
+        ("mediana_consumo_sobre_gasto_mon", ratio.median()),
+        ("personas_ensafi", len(ensafi)),
+        ("personas_comparables_ingreso_gasto", int(ensafi["comparable_ingreso_gasto"].sum())),
+        ("personas_ingreso_laboral_conocido", int(ensafi["ingreso_laboral_mensual"].notna().sum())),
+    ], columns=["indicador", "valor"])
+
     sensitivity = dec_share.copy()
     for basket in ("share_d1", "share_d3"):
         sensitivity = sensitivity.merge(
@@ -86,6 +111,7 @@ def main() -> None:
             "proporcion_acumulada_gasto_d2": conc["lorenz_y"],
         }),
         "hallazgos_clave.csv": findings,
+        "validacion_datos.csv": validation,
     }
     for name, table in outputs.items():
         table.to_csv(config.TABLES / name, index=False, encoding="utf-8-sig")

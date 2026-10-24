@@ -162,15 +162,16 @@ def ensafi_financial(df: pd.DataFrame) -> pd.DataFrame:
         w = sub["FAC_ELE"]
         return {
             "pct_afore": weighted_share(sub["tiene_afore"], w),
-            "pct_ahorro": weighted_share(sub["tiene_ahorro"], w),
-            "pct_deuda": weighted_share(sub["tiene_deuda"], w),
-            "pct_atraso": weighted_share(sub["atraso_pago"], w),
+            "pct_reporta_ahorro_cuentas": weighted_share(sub["reporta_ahorro_cuentas"], w),
+            "pct_deuda_credito": weighted_share(sub["tiene_deuda_credito"], w),
+            "pct_reporta_atraso": weighted_share(sub["reporta_atraso_pago"], w),
             "pct_ingreso_insuficiente": weighted_share(sub["ingreso_insuficiente"], w),
             "pct_alto_estres": weighted_share(sub["alto_estres"], w),
-            "pct_gasta_mas": weighted_share(sub["gasta_mas_que_ingresa"], w),
-            "tasa_ahorro_mediana": weighted_quantile(sub["tasa_ahorro"], w, 0.5),
-            "ingreso_mensual_mediano": weighted_quantile(sub["P5_19"], w, 0.5),
-            "gasto_mensual_mediano": weighted_quantile(sub["P5_21"], w, 0.5),
+            "pct_gasto_supera_ingreso_laboral": weighted_share(sub["gasto_supera_ingreso_laboral"], w),
+            "n_comparables_ingreso_gasto": int(sub["comparable_ingreso_gasto"].sum()),
+            "pct_comparables_ingreso_gasto": weighted_share(sub["comparable_ingreso_gasto"], w),
+            "ingreso_laboral_mensual_mediano": weighted_quantile(sub["ingreso_laboral_mensual"], w, 0.5),
+            "gasto_mensual_mediano": weighted_quantile(sub["gasto_mensual"], w, 0.5),
         }
 
     out = _by_age(df, "FAC_ELE", stats)
@@ -205,7 +206,9 @@ def ensafi_expectations(df: pd.DataFrame) -> pd.DataFrame:
 
 def ensafi_assets(df: pd.DataFrame, viv: pd.DataFrame) -> pd.DataFrame:
     """Bienes y servicios 'visibles' por grupo de edad (ENSAFI)."""
-    merged = df.merge(viv, on="LLAVEVIV", how="left")
+    merged = df.merge(viv, on="LLAVEVIV", how="left", validate="many_to_one", indicator=True)
+    if not merged["_merge"].eq("both").all():
+        raise ValueError("Hay personas ENSAFI sin correspondencia en viviendas")
     rows = []
     for label in config.AGE_LABELS:
         sub = merged[merged["grupo_edad"].astype("string").eq(label)]
@@ -240,7 +243,7 @@ def key_findings(profile: pd.DataFrame, fin: pd.DataFrame, exp: pd.DataFrame) ->
         ("Share D1 (discrecional amplio), jefes 60+", senior["share_d1"]),
         ("% con AFORE, 18-29", fy["pct_afore"]),
         ("% con AFORE, 60+", fs["pct_afore"]),
-        ("% con deuda, 18-29", fy["pct_deuda"]),
+        ("Proporción con deuda o productos de crédito, 18-29", fy["pct_deuda_credito"]),
         ("% alto estrés financiero, 18-29", fy["pct_alto_estres"]),
         ("% que espera pensión/AFORE, 18-29", ey["Pensión, jubilación o AFORE"]),
         ("% que espera pensión/AFORE, 60+", es["Pensión, jubilación o AFORE"]),

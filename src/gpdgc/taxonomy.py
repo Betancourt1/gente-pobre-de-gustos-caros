@@ -6,7 +6,7 @@ Este módulo traduce esas claves a tres definiciones de "gusto caro" que se
 reportan por separado para no depender de una sola etiqueta normativa.
 
 Capítulos (verificados contra catalogos/gastos.csv):
-    01 Alimentos, bebidas no alcohólicas y tabaco
+    01 Alimentos y bebidas no alcohólicas
     02 Bebidas alcohólicas y tabaco
     03 Vestido y calzado
     04 Vivienda, agua, electricidad y combustibles
@@ -57,7 +57,14 @@ D1_CHAPTERS = {"02", "05", "07", "08", "09", "11", "12", "13"}
 # D2: "gusto caro visible": alcohol/tabaco, recreación, restaurantes/hoteles,
 # accesorios personales, streaming/TV de paga y automóviles nuevos.
 D2_CHAPTERS = {"02", "09", "11"}
-D2_PERSONAL_KEYS = {"1321", "1329"}  # joyería/bisutería y bolsos
+D2_PERSONAL_KEYS = {
+    "132111",  # bisutería
+    "132112",  # relojes de pulso
+    "132911",  # bolsas
+    "132912",  # carteras y monederos
+    "132913",  # portafolios
+    "132915",  # maletas para viaje
+}
 D2_STREAMING_KEYS = {"081404", "083921", "083922", "083923", "083924"}
 D2_NEW_CAR_KEY = "071110"
 
@@ -72,14 +79,13 @@ def add_expense_flags(df: pd.DataFrame, clave_col: str = "clave") -> pd.DataFram
     chapter = clave.str[:2]
     chapter = chapter.where(~clave.str.upper().str.startswith("T"), "T9")
 
-    prefix4 = clave.str[:4]
     out["capitulo"] = chapter
     out["capitulo_label"] = chapter.map(CHAPTER_LABELS).fillna("Otros")
     out["es_consumo"] = chapter.isin(CONSUMPTION_CHAPTERS)
     out["d1_discrecional"] = chapter.isin(D1_CHAPTERS)
     out["d2_gusto_visible"] = (
         chapter.isin(D2_CHAPTERS)
-        | prefix4.isin(D2_PERSONAL_KEYS)
+        | clave.isin(D2_PERSONAL_KEYS)
         | clave.isin(D2_STREAMING_KEYS)
         | clave.eq(D2_NEW_CAR_KEY)
     )

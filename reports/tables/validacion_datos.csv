@@ -1,0 +1,12 @@
+﻿indicador,valor
+hogares_fuente,91414.0
+hogares_excluidos_edad,34.0
+hogares_analizados,91380.0
+hogares_con_registros_gasto,91333.0
+hogares_sin_registros_gasto,47.0
+hogares_con_consumo_positivo,91333.0
+hogares_renta_multihogar,214.0
+mediana_consumo_sobre_gasto_mon,0.9976397619671621
+personas_ensafi,20448.0
+personas_comparables_ingreso_gasto,13225.0
+personas_ingreso_laboral_conocido,13655.0

@@ -30,6 +30,10 @@ ENIGH_TABLES = {
     / "conjunto_de_datos_gastoshogar_enigh2024_ns"
     / "catalogos"
     / "gastos.csv",
+    "gastospersona": ENIGH_DIR
+    / "conjunto_de_datos_gastospersona_enigh2024_ns"
+    / "conjunto_de_datos"
+    / "conjunto_de_datos_gastospersona_enigh2024_ns.csv",
 }
 
 ENSAFI_TABLES = {

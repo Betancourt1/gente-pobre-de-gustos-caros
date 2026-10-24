@@ -21,7 +21,9 @@ def weighted_mean(values, weights) -> float:
 
 
 def weighted_quantile(values, weights, q: float) -> float:
-    """Cuantil ponderado (interpolación lineal sobre pesos acumulados)."""
+    """Inversa de la distribución empírica ponderada, sin interpolación."""
+    if not 0 <= q <= 1:
+        raise ValueError("q debe estar entre 0 y 1")
     v = _float_array(values)
     w = _float_array(weights)
     mask = np.isfinite(v) & np.isfinite(w) & (w > 0)
@@ -38,9 +40,11 @@ def weighted_quantile(values, weights, q: float) -> float:
 
 
 def weighted_share(mask, weights) -> float:
-    m = pd.Series(mask).fillna(False).to_numpy(dtype=bool)
+    """Proporción entre respuestas conocidas con ponderador válido."""
+    answers = pd.Series(mask)
+    m = answers.fillna(False).to_numpy(dtype=bool)
     w = _float_array(weights)
-    valid = np.isfinite(w) & (w > 0)
+    valid = answers.notna().to_numpy() & np.isfinite(w) & (w > 0)
     if not valid.any():
         return float("nan")
     return float(w[valid & m].sum() / w[valid].sum())
@@ -49,18 +53,19 @@ def weighted_share(mask, weights) -> float:
 def add_weighted_deciles(
     df: pd.DataFrame, value_col: str, weight_col: str, out_col: str = "decil"
 ) -> pd.DataFrame:
-    """Asigna deciles 1-10 usando cortes ponderados."""
+    """Cortes ponderados; los empates quedan juntos y pueden dejar deciles vacíos."""
     out = df.copy()
     v = pd.to_numeric(out[value_col], errors="coerce")
     w = pd.to_numeric(out[weight_col], errors="coerce")
-    valid = v.notna() & w.notna() & (w > 0)
+    valid = np.isfinite(v) & np.isfinite(w) & (w > 0)
+    out[out_col] = pd.Series(pd.NA, index=out.index, dtype="Int64")
+    if not valid.any():
+        return out
     cuts = [
-        weighted_quantile(v[valid], w[valid], q)
-        for q in np.arange(0.1, 1.0, 0.1)
+        weighted_quantile(v[valid], w[valid], i / 10)
+        for i in range(1, 10)
     ]
-    out[out_col] = pd.cut(
-        v, bins=[-np.inf, *cuts, np.inf], labels=range(1, 11), include_lowest=True
-    ).astype("Int64")
+    out.loc[valid, out_col] = np.searchsorted(cuts, v[valid], side="left") + 1
     return out
 
 
@@ -103,7 +108,9 @@ def lorenz_curve(values, weights, n_points: int = 200):
 
 
 def top_share(values, weights, top: float = 0.10) -> float:
-    """Participación del gasto total que concentra el top `top` de hogares."""
+    """Top ponderado, incluyendo solo la fracción del peso que alcanza el corte."""
+    if not 0 <= top <= 1:
+        raise ValueError("top debe estar entre 0 y 1")
     v = _float_array(values)
     w = _float_array(weights)
     mask = np.isfinite(v) & np.isfinite(w) & (w > 0) & (v >= 0)
@@ -114,6 +121,5 @@ def top_share(values, weights, top: float = 0.10) -> float:
     v, w = v[order], w[order]
     cw = np.cumsum(w)
     cutoff = top * cw[-1]
-    idx = int(np.searchsorted(cw, cutoff, side="left"))
-    idx = min(idx, v.size - 1)
-    return float((v[: idx + 1] * w[: idx + 1]).sum() / (v * w).sum())
+    included = np.minimum(w, np.maximum(0, cutoff - (cw - w)))
+    return float((v * included).sum() / (v * w).sum())
