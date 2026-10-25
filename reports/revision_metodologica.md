@@ -129,3 +129,28 @@ La ejecución posterior con caché reprodujo los trece CSV sin diferencias. Se c
 - [INEGI: descripción de la base ENIGH 2024](https://www.inegi.org.mx/contenidos/programas/enigh/nc/2024/microdatos/889463924494.pdf), construcción de `tot_integ`, `menores` y agregados de gasto. Los catálogos locales se distribuyen con los microdatos.
 - [INEGI: ENSAFI 2023](https://www.inegi.org.mx/programas/ensafi/2023/), diccionario de `tmodulo` y catálogos `p5_19`, `p5_19a`, `p5_21`, `p6_3`, `p6_5_*`, `p6_6_*` y `p6_7` incluidos en la descarga.
 - [OCDE: escala modificada](https://www.oecd.org/en/publications/oecd-handbook-on-the-compilation-of-household-distributional-results-on-income-consumption-and-saving-in-line-with-national-accounts-totals_5a3b9119-en/full-report/component-11.html): primer adulto 1, personas adicionales de 14 o más 0.5, menores de 14 0.3.
+
+## Ampliación histórica H1–H5 — 25 de octubre de 2026
+
+La [comparación histórica](historico_hipotesis.md) incorpora ENIGH 1994, 2004, 2014 y 2024.
+Las correcciones y cifras anteriores documentan la revisión original de D2 y ENSAFI.
+La ampliación usa H1c para gasto: alimentos fuera más recreación, turismo y hospedaje,
+con gasto monetario oficial como denominador. Sus resultados se distinguen de D2.
+
+- H2 compara la brecha por edad dentro de deciles de ingreso por persona de cada año.
+- H3 observa gasto y préstamos/retiros en el mismo hogar; permite medir asociación,
+  pero no asignar esos flujos a compras concretas ni estimar ahorro neto.
+- H4 compara tenencia entre hogares principales a edades equivalentes y separa
+  pensiones recibidas de programas para adultos mayores.
+- H5 compara la concentración de montos H1c, incluidos los ceros.
+
+La ampliación añade intervalos con estratos y UPM para H1–H4, y bootstrap reescalado
+por UPM para H5; las medianas de carga de renta permanecen sin intervalos. El límite
+sobre errores estándar de la revisión original se refiere a D2 y ENSAFI. Comparar
+edades entre olas describe cambios históricos sin separar efectos de cohorte y periodo.
+
+Los [controles históricos](tables/historico_validacion.csv) conservan una discrepancia
+del agregado JUBILA 2004; la serie de pensiones usa las claves explícitas P048 y P049.
+El [informe completo](historico_hipotesis.html) detalla las correspondencias y universos.
+Se reproduce con `python scripts/compare_all_history.py`; las salidas siguen en
+`reports/figures/` y `reports/tables/`.

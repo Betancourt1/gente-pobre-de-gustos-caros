@@ -2,6 +2,11 @@
 
 Los hogares con jefatura de 18–29 años destinan **11.21%** de su gasto monetario a alimentos fuera del hogar y a la categoría amplia de recreación, turismo y hospedaje en 2024. La proporción fue **9.60% en 1994, 11.27% en 2004 y 10.02% en 2014**. La comparación muestra cambios en la composición del gasto y un nivel de 2024 cercano al estimado para 2004.
 
+La [comparación histórica H1–H5](historico_hipotesis.md) amplía este ejercicio con
+equipamiento, brechas por decil, movimientos financieros, vivienda, pensiones y
+concentración. Conserva H1c para los indicadores de gasto y documenta las diferencias
+frente a D2 y a las mediciones de ENSAFI en el [informe completo](historico_hipotesis.html).
+
 ## Hipótesis y alcance
 
 **H1 transversal:** en 2024, los hogares con jefatura joven destinan una mayor proporción de su consumo seleccionado a la canasta D2 que los hogares con jefatura de mayor edad. El resultado original se conserva: 17.0% en 18–29 frente a 12.8% en 60+.

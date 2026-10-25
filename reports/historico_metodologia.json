@@ -1,0 +1,105 @@
+{
+  "base_commit": "49c36532d6d2701162ba588d57a823b8b21a9254",
+  "years": [
+    1994,
+    2004,
+    2014,
+    2024
+  ],
+  "income_codes": {
+    "1994": {
+      "prestamo_recibido": [
+        "P033"
+      ],
+      "retiro_ahorro": [
+        "P031"
+      ],
+      "pension": [
+        "P023"
+      ]
+    },
+    "2004": {
+      "prestamo_recibido": [
+        "P064"
+      ],
+      "retiro_ahorro": [
+        "P062"
+      ],
+      "pension": [
+        "P048",
+        "P049"
+      ]
+    },
+    "2014": {
+      "prestamo_recibido": [
+        "P053"
+      ],
+      "retiro_ahorro": [
+        "P051"
+      ],
+      "pension": [
+        "P032",
+        "P033"
+      ]
+    },
+    "2024": {
+      "prestamo_recibido": [
+        "P053"
+      ],
+      "retiro_ahorro": [
+        "P051"
+      ],
+      "pension": [
+        "P032",
+        "P033"
+      ]
+    }
+  },
+  "h1_max_difference": 4.997408042939355e-11,
+  "new_source_files": [
+    {
+      "path": "1994/microdata/hogares_dbf/hogares.dbf",
+      "sha256": "d4837b10d22142cecab5addc2e77305647806ed2c06ab263325eb8fbe4dace97"
+    },
+    {
+      "path": "1994/microdata/ingresos_dbf/ingresos.dbf",
+      "sha256": "b7bd90f700140cd6b014a865267b6c690b4f6b63118a9ca6a239ae2dfb771829"
+    },
+    {
+      "path": "2004/microdata/hogares_dbf/hogares.dbf",
+      "sha256": "583a3e5ffc1c4c94ee40882ca5997434fc84a8a7d36e192156df2a9d14274b52"
+    },
+    {
+      "path": "2004/microdata/ingresos_dbf/ingresos.dbf",
+      "sha256": "c1b1e5ceb2dbd99731fa0a8c13705aa249555d2b8239a41c80f1aaca43eaca99"
+    },
+    {
+      "path": "2014/microdata/NCV_Hogares_2014_concil_2010_csv/ncv_hogares_2014_concil_2010.csv",
+      "sha256": "0585fd71591f12de81536815104361f443a29855a6f146dbd3bd1e926b4f4711"
+    },
+    {
+      "path": "2014/microdata/NCV_Ingresos_2014_concil_2010_csv/ncv_ingresos_2014_concil_2010.csv",
+      "sha256": "493f56a0ebc63f4fb8dd4115d3275c4a64285b4c11331122bbfd5e41fb8c38ba"
+    },
+    {
+      "path": "2014/microdata/NCV_Vivi_2014_concil_2010_csv/NCV_vivi_2014_concil_2010.csv",
+      "sha256": "ac7940de81f332afcbe8590b307aaa1cb25da64a66c21cac7c6c3fb4125664d6"
+    },
+    {
+      "path": "2024/microdata/enigh2024_ns_hogares_csv/hogares.csv",
+      "sha256": "ce146f558c6592d31fa5f24d0dcf3490b1bbc44ca4db8b3dade827cb7bc6de0a"
+    },
+    {
+      "path": "2024/microdata/enigh2024_ns_ingresos_csv/ingresos.csv",
+      "sha256": "152343691b5b28d31822a255b7fbc6802a91e7393d42933c12dbdd758aad5549"
+    },
+    {
+      "path": "2024/microdata/enigh2024_ns_viviendas_csv/viviendas.csv",
+      "sha256": "05271e4268dc1f661d0e1d33ec2ebd29b297eef550bee08db557713da3316039"
+    }
+  ],
+  "official_catalogs": [
+    "https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/1994/doc/catalogo94.pdf",
+    "https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/2004/doc/catalogo04.pdf"
+  ]
+}

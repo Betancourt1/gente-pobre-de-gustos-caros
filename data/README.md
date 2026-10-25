@@ -76,3 +76,30 @@ then compare its SHA-256 and inspect any source revision before replacing it.
 
 The raw-data inventory snapshots preserve the advertised file titles and formats.
 They do not establish statistical comparability across waves.
+
+## Historical extensions H1–H5
+
+`python scripts/compare_all_history.py` reuses the four downloaded waves and writes
+tables to `reports/tables/`, figures to `reports/figures/`, and the report to `reports/`.
+The [gallery and data dictionary](../reports/historico_hipotesis.md) and
+[full report](../reports/historico_hipotesis.html) describe each comparison.
+
+Besides the H1 expense sources, this extension reads `ingresos` and `hogares` in all
+four waves, plus `viviendas` in 2014 and 2024. Source paths relative to the raw ENIGH
+directory and SHA-256 hashes are recorded in
+[historico_metodologia.json](../reports/historico_metodologia.json).
+
+- H2 uses household H1c shares and within-wave per-person income deciles.
+- H3 reconstructs received nonmortgage loans and savings/investment withdrawals;
+  observing them alongside spending does not identify financing of specific purchases.
+- H4 compares tenure only among primary households. Pension income is reconstructed
+  from explicit codes because the 2004 JUBILA aggregate includes compensation.
+  One remaining amount discrepancy in that aggregate is recorded in
+  [historico_validacion.csv](../reports/tables/historico_validacion.csv).
+- H5 measures concentration of H1c amounts, including zeros, with stratified PSU
+  rescaled bootstrap intervals. No real monetary levels are compared across years.
+
+The [1994 catalog](https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/1994/doc/catalogo94.pdf)
+and [2004 catalog](https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/2004/doc/catalogo04.pdf)
+support the additional variable mappings. They were consulted online; they are not
+new entries in the original download manifest. Original source files remain intact.

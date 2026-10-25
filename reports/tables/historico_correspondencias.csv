@@ -1,0 +1,5 @@
+anio,prestamos_ingresos,retiros_ingresos,pensiones_ingresos,vivienda_rentada,vivienda_propia,hogar_principal
+1994,P033,P031,P023,TENENCIA=5,"TENENCIA=1,2,3,4",FOLIO termina en 0
+2004,P064,P062,"P048,P049",TENENCIA12=1,"TENENCIA12=4,5",FOLIO termina en 0
+2014,P053,P051,"P032,P033",tenencia=1,"tenencia=3,4",foliohog=1
+2024,P053,P051,"P032,P033",tenencia=1,"tenencia=3,4",foliohog=1

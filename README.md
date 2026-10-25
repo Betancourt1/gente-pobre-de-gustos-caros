@@ -18,12 +18,30 @@ El gasto visible está concentrado: el 10% de hogares que más gasta en D2 conce
 |---|---|---|
 | **H1.** En 2024, los hogares con jefatura joven destinan una mayor proporción a D2 que los de mayor edad. | D2: 17.0% vs. 12.8% en 60+; D1: 49.5% vs. 44.3%. | Hay diferencias por edad bajo las canastas elegidas; no todo gasto seleccionado es prescindible. |
 | **H1c.** A igual edad de jefatura (18–29), la proporción en alimentos fuera y recreación, turismo y hospedaje es mayor en 2024 que en las olas anteriores. | 9.60% en 1994; 11.27% en 2004; 10.02% en 2014; 11.21% en 2024. | Diferencias positivas respecto de 1994 y 2014; el IC del contraste con 2004 incluye cero. No sostiene un aumento frente a todas las épocas. |
-| **H2.** La diferencia persiste entre hogares de ingreso similar. | La brecha joven − 60+ en D2 es positiva en los diez deciles: entre 2.46 y 6.19 p.p. | Estratificar por ingreso equivalente no elimina la brecha; no controla empleo, composición familiar ni otros factores. |
-| **H3.** Ese gasto se financia con deuda o desahorro. | **No identificada con estas fuentes.** | ENIGH y ENSAFI no vinculan las compras y su financiamiento en las mismas personas u hogares. |
-| **H4.** Hay desventajas de vivienda y pensión y las quejas son infundadas. | Renta: 41.1% en hogares jóvenes vs. 6.3% en 60+; existen diferencias de tenencia de AFORE y expectativas. | Se describen diferencias actuales. No se miden quejas, suficiencia pensionaria ni deterioro generacional. |
-| **H5.** El gasto visible se concentra en una minoría. | Gini D2: 0.651; top 10%: 48.0%; top 20%: 66.2%. | El gasto está concentrado. El ranking es por gasto D2, no por ingreso o patrimonio. |
+| **H2.** La diferencia persiste entre hogares de ingreso similar. | D2 en 2024: brecha joven − 60+ de 2.46–6.19 p.p. H1c: brecha positiva en los diez deciles de cada año, 1994–2024. | La extensión histórica usa ingreso por persona; describe un patrón por edad e ingreso, sin ajuste conjunto por otros factores. |
+| **H3.** Ese gasto se financia con deuda o desahorro. | **Financiamiento específico no identificado.** Préstamos recibidos en hogares jóvenes: 6.46%, 9.59%, 7.86%, 3.76% en 1994–2024. | ENIGH observa gasto y flujos financieros en el mismo hogar; no asigna esos recursos a compras específicas ni mide desahorro neto con el solo retiro. |
+| **H4.** Hay desventajas de vivienda y pensión y las quejas son infundadas. | Vivienda propia entre hogares jóvenes principales: 45.56% en 1994 y 32.94% en 2024; rentada: 30.50% y 42.20%. | Se observa cambio histórico de tenencia. Pensiones recibidas, expectativas y suficiencia son medidas distintas; no se evalúan quejas ni causalidad. |
+| **H5.** El gasto visible se concentra en una minoría. | D2 en 2024: top 10% concentra 48.0%. En H1c histórico: 67.49% en 1994 y 52.47% en 2024. | La canasta histórica conserva alta concentración, menor en 2024. H1c y D2 no son intercambiables; el ranking es por gasto. |
 
 No hay una estimación causal de cuánto explican los hábitos de consumo de la situación de vivienda o retiro. Tampoco basta una brecha de gasto para atribuir esos problemas a decisiones personales.
+
+## Comparación histórica de todas las hipótesis
+
+La [galería H1–H5](reports/historico_hipotesis.md) reúne **ocho gráficas y diez tablas CSV**
+de ENIGH 1994, 2004, 2014 y 2024, con [informe completo](reports/historico_hipotesis.html).
+
+| Extensión | Resultado histórico | Alcance |
+|---|---|---|
+| H1 y H2: gasto por edad e ingreso | H1c joven: 9.60%, 11.27%, 10.02%, 11.21%. La brecha joven − 60+ es positiva en los diez deciles de cada año. | H1c e ingreso por persona; los IC de la brecha excluyen cero en 8/10 deciles de cada ola antigua y 10/10 de 2024. |
+| H1b: equipamiento, 2004–2024 | Internet en hogares jóvenes: 3.91% → 69.44%; automóvil: 20.40% → 27.10%. | Hogares ENIGH; disponibilidad, sin precio ni antigüedad. |
+| H3: préstamos y retiros | Jóvenes que reciben préstamos no hipotecarios: 6.46%, 9.59%, 7.86%, 3.76%. | Se observa el gasto y los flujos en el mismo hogar; no el financiamiento de cada compra ni el desahorro neto. |
+| H4: vivienda | Propiedad entre hogares jóvenes principales: 45.56% → 32.94%; renta: 30.50% → 42.20%. | Mismo universo de hogares principales; no mide por sí solo asequibilidad o emancipación. |
+| H4: recepción de pensiones | Hogares con jefatura de 60+ e ingreso por pensión de algún integrante: 22.65% → 42.52%. | Recepción actual; no expectativas ni suficiencia futura. Los programas para adultos mayores se muestran aparte. |
+| H5: concentración | El 10% que más gasta en H1c concentra 67.49% → 52.47%; Gini: 0.817 → 0.714. | Ranking por gasto, con ceros incluidos e intervalos por bootstrap de UPM. |
+
+Las extensiones históricas usan definiciones explícitas y conservan los resultados originales
+de D2 y ENSAFI. Los intervalos son individuales y las comparaciones son descriptivas;
+mantener la edad no separa cohorte y periodo.
 
 ## Fuentes y universo
 
@@ -109,6 +127,10 @@ El 47.0% de las personas de 18–29 vive en una vivienda con automóvil, frente 
 
 Son características de la vivienda de residencia, no prueba de propiedad personal, de quién pagó el bien ni de que el automóvil sea nuevo.
 
+**Comparación ENIGH 2004–2024:** entre hogares con jefatura de 18–29, celular pasa de **40.43% a 97.67%**, internet de **3.91% a 69.44%** y automóvil de **20.40% a 27.10%**. Televisión de paga alcanza 31.28% en 2014 y baja a 26.22% en 2024. Estas proporciones usan hogares ENIGH; las anteriores de ENSAFI usan personas residentes y no son directamente equivalentes.
+
+![H1b: equipamiento histórico por edad](reports/figures/h1b_historico_bienes.png)
+
 ### H1c. Comparación histórica a la misma edad
 
 ![H1c: gasto a la misma edad en cuatro olas](reports/figures/h1_historico_jovenes.png)
@@ -136,6 +158,10 @@ En el decil 1, las participaciones son 9.6% y 6.5%; en el decil 10, 26.8% y 21.0
 
 La persistencia dentro de deciles es descriptiva. No controla diferencias de empleo, urbanización, patrimonio, salud o composición familiar.
 
+**Comparación histórica H2:** con H1c e ingreso por persona, la brecha joven − 60+ es positiva en los diez deciles de 1994, 2004, 2014 y 2024. Los IC 95% excluyen cero en 8/10 deciles de cada ola antigua y 10/10 de 2024. Son intervalos individuales, condicionales a cortes de ingreso estimados; los deciles representan posiciones relativas dentro de cada año.
+
+![H2: brechas históricas por decil](reports/figures/h2_historico_brechas.png)
+
 ### H3. Finanzas personales y alcance de la comparación
 
 ![H3: finanzas personales](reports/figures/h3_finanzas_ensafi.png)
@@ -155,6 +181,14 @@ Las primeras cuatro filas utilizan el universo adulto de cada edad. La comparaci
 
 Los jóvenes reportan menor incidencia de crédito y estrés que los adultos de 30–44. Eso **no prueba ni refuta que su gasto visible se financie con deuda**. No se observa D2 y su financiamiento conjuntamente; tampoco puede interpretarse la comparación con ingreso laboral como tasa de ahorro.
 
+**Comparación histórica H3:** ENIGH permite observar el gasto y las entradas financieras en los mismos hogares. Los jóvenes que reciben préstamos no hipotecarios representan **6.46%, 9.59%, 7.86% y 3.76%** en 1994, 2004, 2014 y 2024. Los que retiran ahorro o inversiones son **12.07%, 15.23%, 10.39% y 11.00%**. Se miden flujos declarados, no el saldo total de deuda ni el ahorro neto.
+
+![H3: préstamos y retiros históricos](reports/figures/h3_historico_flujos.png)
+
+En 2024, H1c es **11.12%** entre hogares jóvenes con préstamo o retiro y **11.22%** entre los demás: diferencia **−0.10 p.p. (IC 95%: −1.18 a +0.98)**. Los intervalos de esta asociación incluyen cero en las cuatro olas; la comparación no ajusta ingreso o composición familiar ni identifica el destino de esos recursos.
+
+![H3: asociación entre gasto y movimientos financieros](reports/figures/h3_historico_gasto_flujos.png)
+
 ### H4. Vivienda y expectativas de retiro
 
 ![H4: vivienda y retiro](reports/figures/h4_pensiones_vivienda.png)
@@ -164,6 +198,14 @@ Renta el 41.1% de hogares jóvenes, frente a 23.6% de los de 30–44, 12.3% de l
 En ENSAFI, espera recibir pensión, jubilación o AFORE el 58.9% de jóvenes y el 38.4% de mayores; espera apoyo de gobierno el 55.2% y el 85.0%; espera seguir trabajando el 72.5% y el 35.3%. Las respuestas no son excluyentes. Vivienda como meta —comprar/pagar o remodelar/mejorar— corresponde al 37.4% y al 21.5%.
 
 La incidencia de renta y las expectativas son hechos descriptivos. No miden por sí solos deterioro generacional, capacidad de compra, dependencia efectiva del gobierno ni suficiencia futura de pensiones. La valoración de las quejas requiere un argumento adicional.
+
+**Comparación histórica de vivienda:** entre hogares jóvenes principales, la vivienda propia, pagada o en pago, pasa de **45.56% en 1994 a 32.94% en 2024**; la rentada, de **30.50% a 42.20%**. Los cambios son **−12.62 p.p. (IC 95%: −18.56 a −6.68)** y **+11.70 p.p. (4.72 a 18.68)**. El universo se limita a hogares principales en los cuatro años porque las olas antiguas no registraban tenencia para los adicionales. La dirección se mantiene al fijar la mezcla de edades 18–29 de 2024.
+
+![H4: tenencia de vivienda en cuatro ediciones](reports/figures/h4_historico_vivienda.png)
+
+**Recepción de ingresos para la vejez:** entre hogares con jefatura de 60+, alguno de sus integrantes recibe jubilación o pensión en **22.65%** de los casos en 1994 y **42.52%** en 2024. Los programas para adultos mayores se muestran aparte y pueden coexistir con una pensión. Esta medida no estima la pensión futura de los jóvenes ni su suficiencia.
+
+![H4: pensiones y programas para adultos mayores](reports/figures/h4_historico_pensiones.png)
 
 ### H5. Concentración del gasto visible
 
@@ -177,12 +219,16 @@ La incidencia de renta y las expectativas son hechos descriptivos. No miden por 
 
 El gasto está concentrado en todos los grupos. No se deduce que quienes más gastan sean necesariamente los más ricos ni que los demás hogares estén libres de presión social para consumir.
 
+**Comparación histórica H5:** el 10% que más gasta en H1c concentra **67.49%, 58.12%, 59.11% y 52.47%** en 1994, 2004, 2014 y 2024. El Gini es **0.817, 0.752, 0.761 y 0.714**. Incluye hogares con gasto cero; la concentración describe montos de la canasta H1c, distinta de D2. Los IC usan 399 réplicas de bootstrap reescalado por UPM dentro de estratos.
+
+![H5: concentración histórica de H1c](reports/figures/h5_historico_concentracion.png)
+
 ## Limitaciones
 
 1. Análisis transversal y descriptivo: edad, cohorte y periodo no se separan. No hay identificación causal.
 2. La edad de la jefatura no identifica la edad de quien realiza cada compra. No se presume que el sesgo sea conservador.
 3. Las canastas son normativas: trabajo, transporte y cuidados pueden requerir gastos incluidos en ellas.
-4. H1c publica errores estándar e IC con estratos y UPM; los resultados originales de H1, H2–H5 y ENSAFI siguen siendo descriptivos sin esos intervalos. Los cambios de clasificación entre olas no están incluidos en la incertidumbre muestral.
+4. Las extensiones históricas H1–H4 publican IC con estratos y UPM; H5 usa bootstrap reescalado de UPM. Los resultados originales de D2 y ENSAFI, y las medianas históricas de carga de renta, siguen sin esos intervalos. Los cambios de clasificación entre olas no están incluidos en la incertidumbre muestral.
 5. Hay subreporte, montos desconocidos y saltos de cuestionario. ENSAFI no ofrece aquí una cuenta completa de ingreso y ahorro.
 6. ENIGH y ENSAFI tienen universos y conceptos distintos. El ingreso corriente ENIGH incluye componentes no monetarios.
 7. La carga de renta es aproximada en viviendas con varios hogares y no mide asequibilidad de compra.
@@ -199,10 +245,13 @@ El gasto está concentrado en todos los grupos. No se deduce que quienes más ga
 ├── reports/
 │   ├── revision_metodologica.md  # errores, decisiones y antes/después
 │   ├── h1_historico.md           # comparación a la misma edad y correspondencias
-│   ├── figures/                  # seis figuras originales y tres históricas
-│   └── tables/                   # trece CSV originales y ocho históricos
+│   ├── historico_hipotesis.md    # galería y tablas de la ampliación H1–H5
+│   ├── historico_hipotesis.html  # informe completo de las comparativas
+│   ├── figures/                  # figuras originales y comparativas históricas
+│   └── tables/                   # tablas originales e históricas agregadas
 ├── scripts/make_figures.py       # reconstrucción original ENIGH/ENSAFI
-├── scripts/compare_history.py    # comparación ENIGH 1994–2024
+├── scripts/compare_history.py    # comparación H1c ENIGH 1994–2024
+├── scripts/compare_all_history.py # reproducción de la ampliación H1–H5
 ├── src/gpdgc/                    # lectura, canastas, estadísticas y gráficos
 └── tests/                        # pruebas con datos sintéticos
 ~~~
@@ -248,6 +297,15 @@ python scripts/compare_history.py --raw /ruta/enigh --output /ruta/resultados
 
 El comando genera ocho tablas agregadas y tres figuras H1c; no requiere ENSAFI ni la disposición de archivos del análisis original. Las fuentes se vuelven a leer en cada ejecución.
 
+Para reconstruir la ampliación completa H1–H5 con tablas en `reports/tables/`,
+figuras en `reports/figures/` e informe en `reports/`:
+
+~~~bash
+python scripts/compare_all_history.py
+~~~
+
+Genera diez CSV, ocho PNG y el informe HTML; [diccionario y opciones](reports/historico_hipotesis.md).
+
 ### Datos publicados y cómo ampliar el análisis
 
 Se publican código, bibliografía, figuras y tablas agregadas. Los microdatos completos, ZIP con prefijo `conjunto_de_datos_` y cachés Parquet quedan excluidos por [.gitignore](.gitignore). Los CSV publicados no contienen registros ni identificadores individuales.
@@ -256,6 +314,7 @@ Se publican código, bibliografía, figuras y tablas agregadas. Los microdatos c
 |---|---|
 | h1_perfil_hogares.csv | Niveles y composición del consumo por edad |
 | h1_historico_*.csv | Ocho tablas: perfiles, contrastes, edad ajustada, pesos de edad, quintiles, composición, correspondencias y validación; [diccionario](reports/h1_historico.md#archivos-y-reproducción) |
+| historico_*.csv; h2_historico_*, h3_historico_*, h4_historico_*, h5_historico_* | Diez tablas de la ampliación H1–H5; [diccionario](reports/historico_hipotesis.md#tablas). |
 | h1b_bienes_ensafi.csv | Equipamiento de la vivienda de residencia |
 | h2_share_d2_por_decil.csv | Participación D2 por edad y decil |
 | h2_nivel_d2_por_decil.csv | Monto equivalente D2 por edad y decil |
