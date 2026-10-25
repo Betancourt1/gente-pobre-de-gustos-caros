@@ -1,0 +1,8 @@
+Acceptance contract: historical H1 comparison
+Baseline: 20fa9edb0d5106da0eee790d1858a9e8c7c9afc4.
+Outcome: reproducible ENIGH 1994, 2004, 2014, 2024 comparison of households at the same head ages, aggregate CSV tables, legible static figures, and evidence-based README/H1 interpretation.
+Scope: new historical-analysis module/CLI/tests; requirements; new reports/tables/figures and methodology; README and data/README. No application routes or deployment.
+Required behavior: preserve text household identifiers; official weights, strata and PSUs; compare mean household budget shares, not ratios of national totals; publish sampling uncertainty, sample sizes, classification mapping and validation. Primary denominator is official monetary spending. Transfer-excluded results are a wave-specific sensitivity. Standardize exact ages to fixed 2024 young-head age weights and report income-rank composition descriptively.
+Appearance: readable Spanish chart labels consistent with existing report; distinguish food away from home and broad recreation/tourism/lodging; show 95% intervals and data source.
+Unchanged: original source files/provenance, existing 2024 outputs, H2-H5 estimates, original loader and bibliography. No historical D2 equivalence, causal cohort effect or real expenditure-level claim.
+Authorized mutations: stage implementation under /private/tmp, independently audit exact files before copying to repository, then final read-only approval before a local git add/commit. No push, publication, source replacement, history rewrite or deletion.

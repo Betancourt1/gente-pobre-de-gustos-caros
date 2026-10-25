@@ -1,0 +1,17 @@
+anio,componente,construccion,claves_o_columnas,nota
+1994,alimentos_fuera,gastos.GAS_TRI,A204;A205;A206;A207,Validado contra suma de gasto monetario de las claves; incluye copagos monetarios en registros mixtos.
+1994,recreacion_hospedaje,gastos.GAS_TRI,E018;E019;E020;E021;E022;E023;E024;E025;E026;E027;E028;E029;E030;E031;L001;L002;L003;L004;L005;L006;L007;L008;L009;L010;L011;L012;L013;L014;L015;L016;L017;L018;L019;L020;L021;L022;L023;L024;L025;L026;L027;N003;N004;N005,"Incluye equipo, cultura, recreacion, paquetes de fiestas/turismo y hospedaje incluso no turistico. Agregados amplios, no productos identicos."
+1994,denominador_principal,concen.GASMON,GASMON,"Gasto corriente monetario oficial, incluidas transferencias."
+1994,resta_sensibilidad_transferencias,gastos.GAS_TRI,N011;N012;N013;N014;N015;N016;T901;T902;T903;T904,"Definicion propia de cada ola; en 2024 incluye comisiones financieras y asistencia, entre otros servicios."
+2004,alimentos_fuera,concen.FUERA_HOG,A235;A236;A237;A238;A239,Validado contra suma de gasto monetario de las claves; incluye copagos monetarios en registros mixtos.
+2004,recreacion_hospedaje,concen.ESPARCI,E020;E021;E022;E023;E024;E025;E026;E027;E028;E029;E030;E031;E032;E033;L001;L002;L003;L004;L005;L006;L007;L008;L009;L010;L011;L012;L013;L014;L015;L016;L017;L018;L019;L020;L021;L022;L023;L024;L025;L026;L027;L028;L029;N003;N004;N005,"Incluye equipo, cultura, recreacion, paquetes de fiestas/turismo y hospedaje incluso no turistico. Agregados amplios, no productos identicos."
+2004,denominador_principal,concen.GASMON,GASMON,"Gasto corriente monetario oficial, incluidas transferencias."
+2004,resta_sensibilidad_transferencias,gastos.GAS_TRI,N011;N012;N013;N014;N015;N016;T901;T902;T903;T904;T905;T906;T907;T908;T909;T910;T911;T912;T913;T914,"Definicion propia de cada ola; en 2024 incluye comisiones financieras y asistencia, entre otros servicios."
+2014,alimentos_fuera,concentrado.ali_fuera,A243;A244;A245;A246;A247,Validado contra suma de gasto monetario de las claves; incluye copagos monetarios en registros mixtos.
+2014,recreacion_hospedaje,esparci + paq_turist + gasto_tri de hospedaje adicional,esparci;paq_turist;N005,"Incluye equipo, cultura, recreacion, paquetes de fiestas/turismo y hospedaje incluso no turistico. Agregados amplios, no productos identicos."
+2014,denominador_principal,concentrado.gasto_mon,gasto_mon,"Gasto corriente monetario oficial, incluidas transferencias."
+2014,resta_sensibilidad_transferencias,concentrado.transf_gas,transf_gas,"Definicion propia de cada ola; en 2024 incluye comisiones financieras y asistencia, entre otros servicios."
+2024,alimentos_fuera,concentrado.ali_fuera,111111;111112;111113;111114;111115;111116,Validado contra suma de gasto monetario de las claves; incluye copagos monetarios en registros mixtos.
+2024,recreacion_hospedaje,esparci + paq_turist + gasto_tri de hospedaje adicional,esparci;paq_turist;112012;112013;112030;112090,"Incluye equipo, cultura, recreacion, paquetes de fiestas/turismo y hospedaje incluso no turistico. Agregados amplios, no productos identicos."
+2024,denominador_principal,concentrado.gasto_mon,gasto_mon,"Gasto corriente monetario oficial, incluidas transferencias."
+2024,resta_sensibilidad_transferencias,concentrado.transf_gas,transf_gas,"Definicion propia de cada ola; en 2024 incluye comisiones financieras y asistencia, entre otros servicios."

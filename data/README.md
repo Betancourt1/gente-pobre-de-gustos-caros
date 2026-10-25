@@ -1,10 +1,11 @@
 # ENIGH downloads for historical age comparisons
 
-These files prepare a comparison of households headed by people of the same age
-in 1994, 2004, 2014, and 2024. They are downloaded source data, not harmonized
-estimates or evidence of a generational effect.
+These are the official source files for the comparison of households headed by
+people of the same age in 1994, 2004, 2014, and 2024. The historical H1c analysis,
+category mappings and limitations are documented in
+[reports/h1_historico.md](../reports/h1_historico.md).
 
-## Acquisition contract
+## Original acquisition contract
 
 - Scope: official INEGI ENIGH microdata and associated database documentation for
   the four years below. Repository baseline: `394ab5b6f0690e6bf1f192a9089e98aff564facf`.
@@ -64,10 +65,14 @@ then compare its SHA-256 and inspect any source revision before replacing it.
   suppression of `AGEB` and `UBICA_GEO` values dated 2018-10-17. The downloaded
   database description has a separate errata document dated 2019-12-13.
 - The selected 2014 edition is Nueva construccion. The 2024 edition is Nueva
-  serie. Their expenditure definitions and codes still require harmonization.
-- No historical D2 basket, age profile, standard error, or generational comparison
-  has been calculated. The existing analysis loader still expects its original
-  nested 2024 input layout; these downloads do not change that configuration.
+  serie. The H1c comparison maps broad expenditure categories across these editions;
+  it does not reconstruct the original D2 basket or an identical set of products.
+- `python scripts/compare_history.py` reads this layout and produces historical
+  age profiles, design-based standard errors, contrasts and sensitivity tables.
+  Its main denominator is official monetary expenditure, including monetary
+  co-payments on mixed in-kind records. It is distinct from the G1-only D2 analysis.
+- The original analysis loader still expects its original nested 2024 layout.
+  The historical CLI is separate and does not require ENSAFI.
 
 The raw-data inventory snapshots preserve the advertised file titles and formats.
 They do not establish statistical comparability across waves.

@@ -1,0 +1,5 @@
+anio,n_hogares_fuente,n_jefatura_adulta,n_edad_cero,n_gasto_cero,n_neto_cero,n_filas_gastos,n_estratos,n_upm,gl_diseno,min_upm_por_estrato,max_error_alimentos_pesos,max_error_recreacion_2004_pesos,n_llaves_sin_hogar,n_h1c_mayor_gasto
+1994,12815,12508,285,29,30,697327,121,815,694,2,0.0000000000,,0,0
+2004,22595,22565,0,44,44,1480820,374,3367,2993,2,0.0000000000,0.0000000000,0,0
+2014,19479,19463,0,19,20,1303480,200,2626,2426,2,0.0000000000,,0,0
+2024,91414,91380,0,45,47,5688570,681,10569,9888,2,0.0000000000,,0,0

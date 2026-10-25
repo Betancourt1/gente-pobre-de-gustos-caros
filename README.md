@@ -6,6 +6,8 @@ He oído muchas veces que los jóvenes gastan una cantidad enorme de dinero en l
 
 Este proyecto contrasta esa idea con microdatos de México. Los hogares cuyo jefe o jefa tiene entre 18 y 29 años destinan **17.0%** de su consumo monetario analizado a la canasta de gasto visible D2, frente a **12.8%** en hogares de 60 años o más: una diferencia de **4.25 puntos porcentuales**. Restaurantes y hoteles explica la mayor parte de esa diferencia.
 
+**Comparación histórica a la misma edad:** la canasta H1c —alimentos fuera del hogar más recreación, turismo y hospedaje— representa **9.60%, 11.27%, 10.02% y 11.21%** del gasto monetario de los hogares jóvenes en 1994, 2004, 2014 y 2024. La diferencia de 2024 frente a 2004 es **−0.06 p.p. (IC 95%: −1.05 a +0.93)**. Esta comparación no muestra un aumento continuo ni identifica preferencias generacionales; H1c tiene una definición distinta de D2.
+
 El gasto visible está concentrado: el 10% de hogares que más gasta en D2 concentra **48.0%** del monto total, y el 20% concentra **66.2%**. Los hogares jóvenes representan 7.4% de los hogares analizados y 7.8% del gasto visible. Estas cifras no demuestran que ese consumo cause dificultades de vivienda o retiro.
 
 > **Revisión del 23 de octubre de 2026:** se corrigieron cruces de identificadores, gastos personales omitidos, equivalencia del hogar, periodicidad del ingreso y otros cálculos. Las cifras de la primera publicación fueron sustituidas. El [informe de revisión](reports/revision_metodologica.md) documenta los errores, decisiones y resultados antes y después.
@@ -14,7 +16,8 @@ El gasto visible está concentrado: el 10% de hogares que más gasta en D2 conce
 
 | Hipótesis | Resultado descriptivo | Qué permite afirmar |
 |---|---|---|
-| **H1.** Los jóvenes destinan una mayor proporción de su gasto a bienes no básicos. | D2: 17.0% vs. 12.8% en 60+; D1: 49.5% vs. 44.3%. | Hay diferencias por edad bajo las canastas elegidas; no todo gasto seleccionado es prescindible. |
+| **H1.** En 2024, los hogares con jefatura joven destinan una mayor proporción a D2 que los de mayor edad. | D2: 17.0% vs. 12.8% en 60+; D1: 49.5% vs. 44.3%. | Hay diferencias por edad bajo las canastas elegidas; no todo gasto seleccionado es prescindible. |
+| **H1c.** A igual edad de jefatura (18–29), la proporción en alimentos fuera y recreación, turismo y hospedaje es mayor en 2024 que en las olas anteriores. | 9.60% en 1994; 11.27% en 2004; 10.02% en 2014; 11.21% en 2024. | Diferencias positivas respecto de 1994 y 2014; el IC del contraste con 2004 incluye cero. No sostiene un aumento frente a todas las épocas. |
 | **H2.** La diferencia persiste entre hogares de ingreso similar. | La brecha joven − 60+ en D2 es positiva en los diez deciles: entre 2.46 y 6.19 p.p. | Estratificar por ingreso equivalente no elimina la brecha; no controla empleo, composición familiar ni otros factores. |
 | **H3.** Ese gasto se financia con deuda o desahorro. | **No identificada con estas fuentes.** | ENIGH y ENSAFI no vinculan las compras y su financiamiento en las mismas personas u hogares. |
 | **H4.** Hay desventajas de vivienda y pensión y las quejas son infundadas. | Renta: 41.1% en hogares jóvenes vs. 6.3% en 60+; existen diferencias de tenencia de AFORE y expectativas. | Se describen diferencias actuales. No se miden quejas, suficiencia pensionaria ni deterioro generacional. |
@@ -26,6 +29,7 @@ No hay una estimación causal de cuánto explican los hábitos de consumo de la 
 
 | Fuente | Año | Universo analizado | Ponderador |
 |---|---|---|---|
+| ENIGH histórica, INEGI | 1994, 2004, 2014 | 12,508; 22,565; 19,463 hogares con jefatura adulta, respectivamente | `HOG` / `factor_hog` |
 | ENIGH Nueva Serie, INEGI | 2024 | 91,380 hogares con jefatura de 18 años o más, de 91,414 en la fuente | `factor` |
 | ENSAFI, INEGI/CONDUSEF | 2023 | 20,448 personas de 18 años o más | `FAC_ELE` |
 
@@ -57,6 +61,12 @@ D2 no incluye automáticamente todos los bolsos, efectos personales o artículos
 - Los deciles se calculan en el universo de jefaturas adultas, con ingreso corriente equivalente y ponderadores de hogar. Los empates permanecen juntos y pueden dejar grupos vacíos.
 - Los cuantiles usan la inversa de la distribución empírica ponderada, sin interpolación. El top de gasto incluye solo la fracción del peso del registro que alcanza el corte.
 - Los hogares con consumo seleccionado cero permanecen en niveles y concentración; quedan fuera de medias de participaciones por tener denominador cero.
+
+### Comparación histórica H1c
+
+H1c conserva dos categorías amplias: alimentos fuera del hogar y recreación, turismo y hospedaje. Su denominador es el gasto corriente monetario oficial. Incluye los componentes monetarios de registros mixtos, siguiendo las construcciones de INEGI. A diferencia del capítulo 11 usado en D2, alimentos fuera excluye las claves de comida preparada para consumir en casa. Las claves, diferencias frente a D2 y lecturas de los PDF están en el [informe histórico](reports/h1_historico.md).
+
+Se comparan 1994, 2004, 2014 y 2024 con ponderadores de hogar, errores estándar e IC 95% calculados con estratos y UPM. Se publican sensibilidades que fijan la distribución de edades simples de 2024, comparan quintiles de ingreso por persona y excluyen transferencias según la definición de cada ola. Son cortes transversales repetidos: mantener la edad no separa cohorte y periodo.
 
 ### Indicadores financieros ENSAFI
 
@@ -98,6 +108,23 @@ En jóvenes, D2 se compone de restaurantes y hoteles (11.94 p.p.), recreación (
 El 47.0% de las personas de 18–29 vive en una vivienda con automóvil, frente al 53.7% de quienes tienen 45–59 años. Internet alcanza 81.0% entre jóvenes y 65.6% entre mayores de 60; streaming, 30.3% y 19.0%, respectivamente.
 
 Son características de la vivienda de residencia, no prueba de propiedad personal, de quién pagó el bien ni de que el automóvil sea nuevo.
+
+### H1c. Comparación histórica a la misma edad
+
+![H1c: gasto a la misma edad en cuatro olas](reports/figures/h1_historico_jovenes.png)
+
+| Año | Alimentos fuera | Recreación, turismo y hospedaje | H1c | IC 95% de H1c | n joven válido |
+|---|---:|---:|---:|---:|---:|
+| 1994 | 5.88% | 3.71% | 9.60% | 8.17–11.03% | 2,012 |
+| 2004 | 7.18% | 4.09% | 11.27% | 10.39–12.15% | 2,780 |
+| 2014 | 6.78% | 3.24% | 10.02% | 9.34–10.70% | 2,103 |
+| 2024 | 8.03% | 3.18% | 11.21% | 10.74–11.67% | 7,220 |
+
+En 2024, H1c supera a 1994 en **1.61 p.p.** (IC 95%: 0.11–3.11) y a 2014 en **1.19 p.p.** (0.36–2.01). Frente a 2004, la diferencia es **−0.06 p.p.** (−1.05–0.93). Los IC son individuales, sin ajuste por comparaciones múltiples. Fijando las edades simples en la mezcla de 2024, la diferencia con 2004 queda en **+0.09 p.p.** (IC condicional: −0.90–1.08).
+
+El aumento frente a 1994 proviene de alimentos fuera (+2.15 p.p.); recreación, turismo y hospedaje disminuye 0.54 p.p. Son categorías amplias que incluyen comidas por trabajo, computadoras y hospedaje no turístico. La evidencia permite describir una composición distinta del gasto, sin atribuirla a una mayor preferencia generacional por el lujo.
+
+El [informe H1c](reports/h1_historico.md) contiene las otras dos figuras —[edades](reports/figures/h1_historico_edades.png) e [ingreso](reports/figures/h1_historico_quintiles.png)—, los contrastes, el cambio en composición familiar, las correspondencias de categorías y las páginas clave de la documentación.
 
 ### H2. Diferencias dentro de los deciles
 
@@ -155,7 +182,7 @@ El gasto está concentrado en todos los grupos. No se deduce que quienes más ga
 1. Análisis transversal y descriptivo: edad, cohorte y periodo no se separan. No hay identificación causal.
 2. La edad de la jefatura no identifica la edad de quien realiza cada compra. No se presume que el sesgo sea conservador.
 3. Las canastas son normativas: trabajo, transporte y cuidados pueden requerir gastos incluidos en ellas.
-4. No se calcularon errores estándar ni intervalos con estratos y UPM. Las diferencias puntuales no son pruebas estadísticas.
+4. H1c publica errores estándar e IC con estratos y UPM; los resultados originales de H1, H2–H5 y ENSAFI siguen siendo descriptivos sin esos intervalos. Los cambios de clasificación entre olas no están incluidos en la incertidumbre muestral.
 5. Hay subreporte, montos desconocidos y saltos de cuestionario. ENSAFI no ofrece aquí una cuenta completa de ingreso y ahorro.
 6. ENIGH y ENSAFI tienen universos y conceptos distintos. El ingreso corriente ENIGH incluye componentes no monetarios.
 7. La carga de renta es aproximada en viviendas con varios hogares y no mide asequibilidad de compra.
@@ -171,9 +198,11 @@ El gasto está concentrado en todos los grupos. No se deduce que quienes más ga
 ├── data/processed/               # cachés locales, fuera de Git
 ├── reports/
 │   ├── revision_metodologica.md  # errores, decisiones y antes/después
-│   ├── figures/                  # seis figuras
-│   └── tables/                   # trece CSV agregados
-├── scripts/make_figures.py       # reconstrucción desde fuentes
+│   ├── h1_historico.md           # comparación a la misma edad y correspondencias
+│   ├── figures/                  # seis figuras originales y tres históricas
+│   └── tables/                   # trece CSV originales y ocho históricos
+├── scripts/make_figures.py       # reconstrucción original ENIGH/ENSAFI
+├── scripts/compare_history.py    # comparación ENIGH 1994–2024
 ├── src/gpdgc/                    # lectura, canastas, estadísticas y gráficos
 └── tests/                        # pruebas con datos sintéticos
 ~~~
@@ -207,6 +236,18 @@ python scripts/make_figures.py
 
 No se necesita una caché previa. La reconstrucción crea `data/processed/gastos_consumo_g1_v2.parquet`, trece CSV y seis PNG. Las pruebas sintéticas no requieren descargar las encuestas.
 
+### Reproducir la comparación histórica
+
+Las fuentes oficiales de 1994, 2004, 2014 y 2024 se organizan en `data/raw/enigh/<año>/`. Las ediciones, rutas y enlaces están en [data/README](data/README.md) y [data/enigh_downloads.csv](data/enigh_downloads.csv).
+
+~~~bash
+python scripts/compare_history.py
+# Opcional: directorios alternativos
+python scripts/compare_history.py --raw /ruta/enigh --output /ruta/resultados
+~~~
+
+El comando genera ocho tablas agregadas y tres figuras H1c; no requiere ENSAFI ni la disposición de archivos del análisis original. Las fuentes se vuelven a leer en cada ejecución.
+
 ### Datos publicados y cómo ampliar el análisis
 
 Se publican código, bibliografía, figuras y tablas agregadas. Los microdatos completos, ZIP con prefijo `conjunto_de_datos_` y cachés Parquet quedan excluidos por [.gitignore](.gitignore). Los CSV publicados no contienen registros ni identificadores individuales.
@@ -214,6 +255,7 @@ Se publican código, bibliografía, figuras y tablas agregadas. Los microdatos c
 | Tabla en reports/tables/ | Contenido |
 |---|---|
 | h1_perfil_hogares.csv | Niveles y composición del consumo por edad |
+| h1_historico_*.csv | Ocho tablas: perfiles, contrastes, edad ajustada, pesos de edad, quintiles, composición, correspondencias y validación; [diccionario](reports/h1_historico.md#archivos-y-reproducción) |
 | h1b_bienes_ensafi.csv | Equipamiento de la vivienda de residencia |
 | h2_share_d2_por_decil.csv | Participación D2 por edad y decil |
 | h2_nivel_d2_por_decil.csv | Monto equivalente D2 por edad y decil |
