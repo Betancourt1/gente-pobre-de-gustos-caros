@@ -33,46 +33,11 @@ def series(ax,table,groups=('18–29','60+'),scale=100,labels=False):
 
 def save(fig,name,title,note):
     fig.suptitle(title,x=.08,ha='left',fontsize=16,y=.98)
-    fig.text(.08,.025,note,fontsize=9,color='#444444',va='bottom')
-    fig.subplots_adjust(left=.08,right=.97,top=.84,bottom=.22,wspace=.28,hspace=.55)
+    fig.text(.08,.025,note+'\nContrastes entre edades y años: significancia.html; decisión con p ajustada de Holm.',fontsize=9,color='#444444',va='bottom')
+    bottom=max(.22,(.75+.20*(note.count('\n')+2))/fig.get_figheight())
+    fig.subplots_adjust(left=.08,right=.97,top=.84,bottom=bottom,wspace=.28,hspace=.55)
     fig.savefig(OUT/'figures'/f'{name}.png',dpi=175)
     plt.close(fig)
-
-def concentration_uncertainty(waves,out):
-    out=Path(out)
-    result=pd.read_csv(out/'tables/h5_historico_concentracion.csv')
-    rng=np.random.default_rng(20261025)
-    B=399
-    for year,df in waves.items():
-        print(year,'bootstrap H5',flush=True)
-        units=df[['est_dis','upm']].drop_duplicates().sort_values(['est_dis','upm'])
-        sizes=units.groupby('est_dis',sort=True).size().to_numpy()
-        unitindex=pd.MultiIndex.from_frame(units)
-        ids=unitindex.get_indexer(pd.MultiIndex.from_frame(df[['est_dis','upm']]))
-        assert ids.min()>=0 and (sizes>=2).all()
-        ordered={}
-        for label,dom in [('Total adulto',df.edad_jefe.ge(18)),('18–29',df.edad_jefe.between(18,29)),('60+',df.edad_jefe.ge(60))]:
-            pos=np.flatnonzero(dom.to_numpy())
-            pos=pos[np.argsort(df.h1c.to_numpy()[pos],kind='stable')]
-            ordered[label]=(df.h1c.to_numpy()[pos],df.peso.to_numpy()[pos],ids[pos])
-        draws={label:[] for label in ordered}
-        for _ in range(B):
-            mult=np.concatenate([rng.multinomial(int(m-1),np.full(m,1/m))*m/(m-1) for m in sizes])
-            for label,(values,weight,unit) in ordered.items():
-                w=weight*mult[unit]
-                cw=np.cumsum(w); cv=np.cumsum(values*w)
-                x=np.r_[0,cw/cw[-1]]; y=np.r_[0,cv/cv[-1]]
-                draws[label].append([1-2*np.trapezoid(y,x),1-np.interp(.9,x,y),1-np.interp(.8,x,y)])
-        for label,draw in draws.items():
-            i=result.index[result.anio.eq(year)&result.grupo_edad.eq(label)][0]
-            se=np.std(draw,axis=0,ddof=1)
-            for metric,s in zip(['gini','top10','top20'],se):
-                point=result.at[i,metric]
-                result.loc[i,metric+'_se']=s
-                result.loc[i,metric+'_ic95_inferior']=point-1.96*s
-                result.loc[i,metric+'_ic95_superior']=point+1.96*s
-            result.loc[i,'bootstrap_replicas']=B
-    result.to_csv(out/'tables/h5_historico_concentracion.csv',index=False,float_format='%.10f')
 
 def main(out):
     global OUT
@@ -84,7 +49,7 @@ def main(out):
         d=p.loc[p.hipotesis.eq('H1')&p.indicador.eq(metric)]
         series(ax,d,groups=['18–29'],labels=True);style(ax);ax.set_ylim(0,15);ax.set_title(title)
     axs[0].set_ylabel('Proporción del gasto monetario (%)')
-    save(fig,'h1_historico_comparacion','H1 · El nivel de 2024 es cercano al de 2004',
+    save(fig,'h1_historico_comparacion','H1 · Gasto a la misma edad e incertidumbre muestral',
          'Hogares con jefatura de 18–29 años. Medias ponderadas e IC 95% con estratos y UPM.\nH1c es una canasta amplia comparable por finalidad; difiere de D2.')
     # Equipment comparison uses households consistently, excluding ENSAFI's person-level base.
     fig,axs=plt.subplots(2,2,figsize=(10,7.5))
@@ -137,9 +102,9 @@ def main(out):
     for ax,metric,title,scale in zip(axs,['gini','top10'],['Gini de montos de H1c','Gasto que concentra el 10% que más gasta'],[1,100]):
         for group in ['Total adulto','18–29']:
             d=c.loc[c.grupo_edad.eq(group)].sort_values('anio');v=d[metric].to_numpy()*scale
-            ax.errorbar(d.anio,v,yerr=1.96*d[metric+'_se'].to_numpy()*scale,fmt='o-',capsize=3,label=group,color=COLORS[group])
+            ax.errorbar(d.anio,v,yerr=np.vstack([v-d[metric+'_ic95_inferior'].to_numpy()*scale,d[metric+'_ic95_superior'].to_numpy()*scale-v]),fmt='o-',capsize=3,label=group,color=COLORS[group])
         style(ax);ax.set_ylim(0,1 if metric=='gini' else 100);ax.set_title(title,fontsize=11)
     axs[0].legend(title='Universo',frameon=False);axs[1].set_ylabel('Porcentaje del monto total de H1c')
     save(fig,'h5_historico_concentracion','H5 · Concentración del gasto en la canasta histórica',
-         'H1c: alimentos fuera + recreación, turismo y hospedaje; montos del hogar, con ceros incluidos.\nIC 95% normales: bootstrap reescalado por UPM dentro de estrato, 399 réplicas.\nOrden por gasto H1c, no por ingreso o riqueza. Las cantidades monetarias no se comparan entre años.')
+         'H1c: alimentos fuera + recreación, turismo y hospedaje; montos del hogar, con ceros incluidos.\nIC 95%: bootstrap reescalado por UPM dentro de estrato, 999 réplicas.\nOrden por gasto H1c, no por ingreso o riqueza. Las cantidades monetarias no se comparan entre años.')
     print('8 figuras generadas',flush=True)

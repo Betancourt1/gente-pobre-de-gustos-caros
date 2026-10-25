@@ -1,0 +1,32 @@
+{
+  "url": "https://www.inegi.org.mx/contenidos/programas/ensafi/2023/microdatos/ensafi_2023_bd_csv.zip",
+  "retrieved_utc": "2026-10-25T07:13:32.490368+00:00",
+  "zip_sha256": "c0594079ddf4733d4f574d00f5e84290c62c5330eab0567dd867c26d42fafacd",
+  "bytes": 5027338,
+  "files": [
+    {
+      "table": "tsdem",
+      "archive_member": "TSDEM.csv",
+      "path": "data/raw/ensafi/2023/tsdem.csv",
+      "sha256": "608ef871825521c846f23a95f66c1f976475566dcb84ca5bb4d4ed3ce9cef7da"
+    },
+    {
+      "table": "tvivienda",
+      "archive_member": "TVIVIENDA.csv",
+      "path": "data/raw/ensafi/2023/tvivienda.csv",
+      "sha256": "df245590611d6d6bb72ad521c4be4d4815c428ec05aa005bfc706539048b304e"
+    },
+    {
+      "table": "thogar",
+      "archive_member": "THOGAR.csv",
+      "path": "data/raw/ensafi/2023/thogar.csv",
+      "sha256": "2e4316e66efc7ab3c23159e906687fddfbb257351c62c9958834a6b9f273070b"
+    },
+    {
+      "table": "tmodulo",
+      "archive_member": "TMODULO.csv",
+      "path": "data/raw/ensafi/2023/tmodulo.csv",
+      "sha256": "fa915966f833dd348052627f23b342e318be3ee7ff82f062b5a8ca15ee7cb123"
+    }
+  ]
+}

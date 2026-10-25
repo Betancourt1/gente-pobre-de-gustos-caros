@@ -25,3 +25,6 @@ Thumbs.db
 .DS_Store
 .vscode/
 .idea/
+
+# ENSAFI source microdata; provenance is tracked separately
+data/raw/ensafi/

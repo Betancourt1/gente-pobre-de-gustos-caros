@@ -239,6 +239,7 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--raw',type=Path,default=RAW)
     parser.add_argument('--output',type=Path,default=OUT)
+    parser.add_argument("--replicates",type=int,default=999)
     args=parser.parse_args()
     RAW=args.raw.resolve()
     OUT=args.output.resolve()
@@ -247,6 +248,9 @@ if __name__=='__main__':
         from gpdgc import historical_figures as figures
         from gpdgc import historical_report as report
         waves=main()
-        figures.concentration_uncertainty(waves,OUT)
+        from gpdgc import historical_inference
+        historical_inference.run(waves,OUT,args.replicates)
         figures.main(OUT)
         report.main(OUT)
+        from gpdgc.significance_report import build
+        build(OUT)

@@ -253,21 +253,21 @@ def compare_waves(waves):
             ranks.append({"anio": year, "quintil_ingreso_pc": quintile,
                           **survey_mean(df, df.share_h1c, domain)})
     profiles, sensitivity = pd.DataFrame(profiles), pd.DataFrame(sensitivity)
+    from itertools import combinations
+    from .survey import difference, adjust_holm
     changes = []
     for adjustment, table in [("sin_ajuste", profiles[profiles.grupo_edad.eq("18–29")]), ("edades_simples_2024", sensitivity)]:
         for metric in METRICS:
             sub = table[table.indicador.eq(metric)].set_index("anio")
-            for year in YEARS[:-1]:
-                current, prior = sub.loc[2024], sub.loc[year]
-                # Independent waves; conservative smaller design df for the t critical value.
-                se = np.hypot(current.error_estandar, prior.error_estandar)
-                point = current.estimacion - prior.estimacion
-                degrees = min(current.gl_diseno, prior.gl_diseno)
-                margin = t.ppf(0.975, degrees) * se
-                changes.append({"anio_base": year, "anio_final": 2024, "grupo_edad": "18–29", "indicador": metric,
-                                "ajuste": adjustment, "cambio_pp": point * 100, "error_estandar_pp": se * 100,
-                                "ic95_inferior_pp": (point - margin) * 100, "ic95_superior_pp": (point + margin) * 100,
-                                "gl_contraste": degrees})
-    return {"correspondencias": category_mapping(), "perfiles": profiles, "edades_ajustadas": sensitivity, "cambios": pd.DataFrame(changes),
+            for year, final_year in combinations(YEARS, 2):
+                current, prior = sub.loc[final_year], sub.loc[year]
+                contrast = difference(current.to_dict(), prior.to_dict(), independent=True)
+                changes.append({"anio_base": year, "anio_final": final_year, "grupo_edad": "18–29", "indicador": metric,
+                                "ajuste": adjustment, "familia": f"{adjustment}|{metric}",
+                                "cambio_pp": contrast["estimacion"] * 100, "error_estandar_pp": contrast["error_estandar"] * 100,
+                                "ic95_inferior_pp": contrast["ic95_inferior"] * 100, "ic95_superior_pp": contrast["ic95_superior"] * 100,
+                                "gl_contraste": contrast["gl_diseno"], "p_valor": contrast["p_valor"]})
+    changes = adjust_holm(pd.DataFrame(changes))
+    return {"correspondencias": category_mapping(), "perfiles": profiles, "edades_ajustadas": sensitivity, "cambios": changes,
             "composicion": pd.DataFrame(composition), "quintiles": pd.DataFrame(ranks),
             "pesos_edad": pd.DataFrame({"edad_jefe": list(age_weights), "peso_referencia_2024": list(age_weights.values())})}

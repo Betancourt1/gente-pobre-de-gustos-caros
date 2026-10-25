@@ -154,3 +154,15 @@ del agregado JUBILA 2004; la serie de pensiones usa las claves explícitas P048 
 El [informe completo](historico_hipotesis.html) detalla las correspondencias y universos.
 Se reproduce con `python scripts/compare_all_history.py`; las salidas siguen en
 `reports/figures/` y `reports/tables/`.
+
+## Precisión y pruebas entre categorías — 25 de octubre de 2026
+
+Esta ampliación completa la inferencia del análisis original y de las series históricas. Las limitaciones anteriores sobre ausencia de intervalos documentan el estado previo. Se conservan los estimadores puntuales y las canastas. Se agregan IC 95% para medias, proporciones, medianas, concentración y Lorenz; se contrastan todos los pares de edades por indicador/año y todos los pares de años a edad fija.
+
+Las medias y razones usan linealización por estratos/UPM. Las diferencias de grupos mantienen la covarianza, incluso cuando comparten UPM. Medianas y concentración usan 999 réplicas de UPM con reescalamiento Rao–Wu y semillas fijas. Los CSV identifican método, tamaño válido, grados de libertad, error estándar y límites. Los conteos de observaciones y controles de conciliación son cantidades de la muestra, no estimaciones poblacionales con intervalos.
+
+La decisión se basa en p ajustada de Holm <0.05, con familia y número de pruebas explícitos. Los IC son individuales; pueden excluir cero sin superar Holm. No detectar una diferencia no demuestra igualdad. H1c 2024−1994 deja de superar el criterio ajustado entre los seis pares de años; 2024−2014 sí lo supera. D2 18–29 frente a 30–44 tampoco lo supera.
+
+El [informe de significancia](significancia.html) permite consultar todas las decisiones y los gráficos de diferencias. Las bandas de Lorenz son puntuales, los cortes de ingreso y pesos de edad se tratan como fijos, los factores no se recalibran y las olas se tratan como independientes. No se convierten estas comparaciones en afirmaciones causales o de equivalencia.
+
+Las pruebas automatizadas incluyen varianza estratificada calculada a mano, conservación de UPM fuera de dominios, covarianza de diferencias, bootstrap compartido y ajuste Holm. Se verifican también estimaciones puntuales contra las salidas previas, cobertura de todos los pares, regeneración y legibilidad de figuras.

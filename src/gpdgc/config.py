@@ -51,6 +51,16 @@ ENSAFI_TABLES = {
     / "conjunto_de_datos_tvivienda_ensafi_2023.csv",
 }
 
+# Support both the original download layout and the documented raw-data layout.
+for table, path in ENIGH_TABLES.items():
+    candidate = ROOT / 'data/raw/enigh/2024/microdata' / f'enigh2024_ns_{table}_csv' / f'{table}.csv'
+    if not path.exists() and candidate.exists():
+        ENIGH_TABLES[table] = candidate
+for table, path in ENSAFI_TABLES.items():
+    candidate = ROOT / 'data/raw/ensafi/2023' / f'{table}.csv'
+    if not path.exists() and candidate.exists():
+        ENSAFI_TABLES[table] = candidate
+
 PROCESSED = ROOT / "data" / "processed"
 FIGURES = ROOT / "reports" / "figures"
 TABLES = ROOT / "reports" / "tables"

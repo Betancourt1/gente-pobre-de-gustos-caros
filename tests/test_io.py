@@ -25,6 +25,7 @@ class SourceTests(unittest.TestCase):
                 "edad_jefe": [30, 65, 17], "tot_integ": [3, 1, 1],
                 "menores": [0, 0, 0], "ing_cor": [1000, 500, 100],
                 "gasto_mon": [160, 70, 0],
+                "est_dis": ["01"] * 3, "upm": ["01", "02", "03"],
             }),
             "viviendas": pd.DataFrame({
                 "folioviv": ids, "tenencia": ["1", "3", "3"], "renta": [100, 0, 0],
@@ -57,6 +58,7 @@ class SourceTests(unittest.TestCase):
     def test_cruce_gastos_personales_y_equivalencia(self):
         h = io.load_enigh_hogares(force_gastos=True).set_index("folioviv")
         self.assertEqual(len(h), 2)  # jefe de 17 años fuera del universo adulto
+        self.assertIn(("01", "03"), h.attrs["design_units"])  # PSU retained for domain variance
         young = h.loc["0100000001"]
         self.assertEqual(young.gasto_total_g1, 160)
         self.assertEqual(young.gasto_d2, 20)

@@ -1,8 +1,8 @@
-Indicador (porcentaje),1994,2004,2014,2024
-"H1: proporción H1c, jefatura 18–29",9.5969,11.2695,10.0204,11.2069
-"H3: recibió préstamo no hipotecario, jefatura 18–29",6.4611,9.5891,7.8630,3.7577
-"H3: retiró ahorro o inversiones, jefatura 18–29",12.0675,15.2282,10.3858,10.9994
-"H4: vivienda propia, hogar principal 18–29",45.5602,37.2103,35.3882,32.9437
-"H4: vivienda rentada, hogar principal 18–29",30.5018,36.0164,37.2587,42.1995
-"H4: recibió pensión en el hogar, jefatura 60+",22.6470,31.6505,34.4180,42.5221
-"H5: concentración del top 10%, todas las jefaturas adultas",67.4898,58.1157,59.1089,52.4700
+Indicador (porcentaje),1994,2004,2014,2024,1994_ic95_inferior,1994_ic95_superior,2004_ic95_inferior,2004_ic95_superior,2014_ic95_inferior,2014_ic95_superior,2024_ic95_inferior,2024_ic95_superior
+"H1: proporción H1c, jefatura 18–29",9.5969,11.2695,10.0204,11.2069,8.1678,11.0260,10.3921,12.1469,9.3367,10.7041,10.7436,11.6703
+"H3: recibió préstamo no hipotecario, jefatura 18–29",6.4611,9.5891,7.8630,3.7577,4.8025,8.1197,7.8343,11.3439,6.4416,9.2843,3.1670,4.3484
+"H3: retiró ahorro o inversiones, jefatura 18–29",12.0675,15.2282,10.3858,10.9994,9.4200,14.7151,12.5978,17.8585,8.8477,11.9240,9.9171,12.0818
+"H4: vivienda propia, hogar principal 18–29",45.5602,37.2103,35.3882,32.9437,39.8771,51.2433,33.9314,40.4891,32.5018,38.2746,31.2215,34.6659
+"H4: vivienda rentada, hogar principal 18–29",30.5018,36.0164,37.2587,42.1995,23.7790,37.2245,33.0800,38.9529,34.3577,40.1597,40.3314,44.0677
+"H4: recibió pensión en el hogar, jefatura 60+",22.6470,31.6505,34.4180,42.5221,19.9667,25.3274,28.7281,34.5729,32.4914,36.3446,41.5945,43.4497
+"H5: concentración del top 10%, todas las jefaturas adultas",67.4898,58.1157,59.1089,52.4700,64.5062,70.4735,56.3624,59.8691,57.0439,61.1740,51.6165,53.3236

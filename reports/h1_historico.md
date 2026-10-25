@@ -7,11 +7,13 @@ equipamiento, brechas por decil, movimientos financieros, vivienda, pensiones y
 concentración. Conserva H1c para los indicadores de gasto y documenta las diferencias
 frente a D2 y a las mediciones de ENSAFI en el [informe completo](historico_hipotesis.html).
 
+La [tabla de significancia](significancia.html) reúne todos los pares de edades y años, sus intervalos, p de Holm y decisiones.
+
 ## Hipótesis y alcance
 
 **H1 transversal:** en 2024, los hogares con jefatura joven destinan una mayor proporción de su consumo seleccionado a la canasta D2 que los hogares con jefatura de mayor edad. El resultado original se conserva: 17.0% en 18–29 frente a 12.8% en 60+.
 
-**H1c histórica:** a la misma edad de jefatura, la proporción de gasto monetario en alimentos fuera y recreación, turismo y hospedaje es mayor en 2024 que en cada una de las tres olas anteriores. Los contrastes apoyan diferencias positivas respecto de 1994 y 2014, pero el contraste con 2004 es impreciso y cercano a cero. Por tanto, estos resultados no sostienen un aumento frente a todas las épocas comparadas ni un crecimiento continuo.
+**H1c histórica:** a la misma edad de jefatura, la proporción de gasto monetario en alimentos fuera y recreación, turismo y hospedaje es mayor en 2024 que en cada una de las tres olas anteriores. Con Holm para todos los pares de años, solo 2024 frente a 2014 supera el criterio de 0.05; frente a 1994 y 2004 la evidencia es insuficiente. Por tanto, estos resultados no sostienen un aumento frente a todas las épocas comparadas ni un crecimiento continuo.
 
 H1c compara hogares distintos cuya jefatura tiene la misma edad, no a las mismas personas a lo largo del tiempo. El periodo y la cohorte cambian simultáneamente. La categoría incluye comidas por trabajo, computadoras, software y hospedaje no turístico; su aumento no identifica una preferencia por el lujo.
 
@@ -34,7 +36,7 @@ Media ponderada de las proporciones de cada hogar. Denominador: gasto corriente 
 | Frente a 2004 | −0.06 | −1.05 a +0.93 |
 | Frente a 2014 | +1.19 | +0.36 a +2.01 |
 
-Entre 1994 y 2024, alimentos fuera aumenta **2.15 p.p.**, mientras recreación, turismo y hospedaje disminuye **0.54 p.p.**. Frente a 2004, los cambios son +0.85 y −0.91 p.p., respectivamente. Los intervalos corresponden a cada contraste individual; no tienen ajuste por comparaciones múltiples. Un intervalo que incluye cero no demuestra igualdad.
+Entre 1994 y 2024, alimentos fuera aumenta **2.15 p.p.**, mientras recreación, turismo y hospedaje disminuye **0.54 p.p.**. Frente a 2004, los cambios son +0.85 y −0.91 p.p., respectivamente. Los intervalos corresponden a cada contraste individual. La decisión usa Holm entre los seis pares de años: 2024−1994 p=0.1430, 2024−2004 p=1.0000 y 2024−2014 p=0.0293. Solo este último supera el criterio ajustado. La tabla completa incluye ahora todos los pares, no solo 2024 frente a años previos. Un intervalo que incluye cero no demuestra igualdad.
 
 ## Edad e ingreso
 
@@ -47,7 +49,7 @@ El grupo 18–29 también oculta diferencias internas:
 | 18–24 | 11.38% | 13.09% | 9.89% | 11.09% |
 | 25–29 | 8.44% | 10.29% | 10.09% | 11.27% |
 
-Los intervalos y tamaños de estos subgrupos están en `h1_historico_perfiles.csv`; las diferencias puntuales de esta tabla no son pruebas de cambio.
+Esta subdivisión complementaria mantiene su carácter descriptivo; las pruebas entre edades usan los cuatro grupos principales 18–29, 30–44, 45–59 y 60+. Los intervalos y tamaños de estos subgrupos están en `h1_historico_perfiles.csv`; las diferencias puntuales de esta tabla no son pruebas de cambio.
 
 ![Comparación de H1c por edad](figures/h1_historico_edades.png)
 
@@ -119,7 +121,7 @@ El comando escribe ocho CSV `reports/tables/h1_historico_*.csv` y tres PNG `repo
 | Sufijo de tabla | Contenido y unidades |
 |---|---|
 | `perfiles` | Año × edad × indicador; proporción, error estándar, IC 95%, n válido y hogares expandidos |
-| `cambios` | Diferencias 2024 menos cada ola anterior, en puntos porcentuales, con error estándar e IC |
+| `cambios` | Los seis pares de años para H1c y componentes, con y sin ajuste de edad: diferencia, error estándar, IC y p de Holm |
 | `edades_ajustadas` | Participaciones con pesos de edades simples de 2024 |
 | `pesos_edad` | Distribución de edades que se mantiene fija en la estandarización |
 | `quintiles` | H1c de jóvenes por quintil de ingreso corriente por persona de cada año |

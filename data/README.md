@@ -71,8 +71,8 @@ then compare its SHA-256 and inspect any source revision before replacing it.
   age profiles, design-based standard errors, contrasts and sensitivity tables.
   Its main denominator is official monetary expenditure, including monetary
   co-payments on mixed in-kind records. It is distinct from the G1-only D2 analysis.
-- The original analysis loader still expects its original nested 2024 layout.
-  The historical CLI is separate and does not require ENSAFI.
+- The original analysis loader supports both its original nested layout and
+  `data/raw/enigh/2024/microdata/`. The historical CLI does not require ENSAFI.
 
 The raw-data inventory snapshots preserve the advertised file titles and formats.
 They do not establish statistical comparability across waves.
@@ -103,3 +103,13 @@ The [1994 catalog](https://www.inegi.org.mx/contenidos/programas/enigh/tradicion
 and [2004 catalog](https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/2004/doc/catalogo04.pdf)
 support the additional variable mappings. They were consulted online; they are not
 new entries in the original download manifest. Original source files remain intact.
+
+## Survey uncertainty and ENSAFI provenance
+
+The original analysis now reads `EST_DIS`, `UPM_DIS`, and `FAC_ELE` from ENSAFI TMODULO, and retains ENIGH `est_dis`, `upm`, and `factor`. The full ENIGH PSU inventory is retained before restricting to adult household heads. Every original point estimate is checked against its uncertainty calculation before export.
+
+The official ENSAFI 2023 CSV archive was obtained from the program's public microdata inventory. [ensafi_downloads.json](ensafi_downloads.json) records its URL, retrieval time, archive hash and extracted table hashes. Raw files remain outside Git at `data/raw/ensafi/2023/`. The existing original nested layout remains supported.
+
+Means and ratios use Taylor linearization. Medians, Gini/top shares and Lorenz bands use 999 stratified PSU Rao–Wu replicates with published weights, without recalibration or finite-population corrections. Contrasts retain within-survey covariance; cross-year contrasts assume independence. Estimated income cuts and reference-age weights remain fixed. Holm families are recorded explicitly in the contrast tables. See [significance report](../reports/significancia.html).
+
+Method references: [INEGI ENSAFI sampling design](https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/nueva_estruc/889463916840.pdf), [INEGI ENIGH sampling design](https://www.inegi.org.mx/contenidos/programas/enigh/nc/2024/doc/889463924517.pdf), and the survey package author’s [Rao–Wu subbootstrap documentation](https://r-survey.r-forge.r-project.org/survey/html/bootweights.html). The implementation uses the public-data approximation described above rather than official replicate weights.

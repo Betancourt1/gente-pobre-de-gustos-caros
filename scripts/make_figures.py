@@ -17,7 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
-from gpdgc import analysis, config, plots  # noqa: E402
+from gpdgc import analysis, config, plots, inference  # noqa: E402
 from gpdgc.io import (  # noqa: E402
     load_enigh_hogares,
     load_ensafi_personas,
@@ -28,6 +28,7 @@ from gpdgc.io import (  # noqa: E402
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force-gastos", action="store_true")
+    parser.add_argument("--replicates", type=int, default=999)
     args = parser.parse_args()
 
     config.FIGURES.mkdir(parents=True, exist_ok=True)
@@ -113,22 +114,28 @@ def main() -> None:
         "hallazgos_clave.csv": findings,
         "validacion_datos.csv": validation,
     }
+    print("Calculando precisión y contrastes entre todos los grupos de edad...", flush=True)
+    concentration_precision = inference.original(outputs, enigh, ensafi, viv, replicates=args.replicates)
+    conc["precision"] = concentration_precision
+    conc["lorenz_precision"] = outputs["h5_curva_lorenz_d2.csv"]
     for name, table in outputs.items():
         table.to_csv(config.TABLES / name, index=False, encoding="utf-8-sig")
 
     # --- Figuras --------------------------------------------------------
     print("Generando figuras...")
     paths = [
-        plots.fig_h1_composicion(profile),
-        plots.fig_h2_decil(dec_share, dec_level),
-        plots.fig_h3_finanzas(fin),
-        plots.fig_h4_pensiones_vivienda(exp, housing),
+        plots.fig_h1_composicion(outputs["h1_perfil_hogares.csv"]),
+        plots.fig_h2_decil(outputs["h2_share_d2_por_decil.csv"], outputs["h2_nivel_d2_por_decil.csv"]),
+        plots.fig_h3_finanzas(outputs["h3_finanzas_ensafi.csv"]),
+        plots.fig_h4_pensiones_vivienda(outputs["h4_expectativas_ensafi.csv"], outputs["h4_vivienda_por_edad.csv"]),
         plots.fig_h5_concentracion(conc),
-        plots.fig_h1b_bienes(assets),
+        plots.fig_h1b_bienes(outputs["h1b_bienes_ensafi.csv"]),
     ]
     for p in paths:
         print(f"  {p}")
 
+    from gpdgc.significance_report import build
+    build(config.FIGURES.parent)
     print("\nResumen de hallazgos:")
     print(findings.to_string(index=False))
 

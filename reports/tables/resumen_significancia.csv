@@ -1,0 +1,5 @@
+archivo,tipo,comparaciones,diferencias_holm
+contrastes_categorias.csv,edad,594,350
+historico_comparaciones_edad.csv,edad,864,550
+historico_comparaciones_edad.csv,flujo,16,1
+historico_comparaciones_tiempo.csv,historico,920,472

@@ -282,8 +282,11 @@ def load_enigh_hogares(force_gastos: bool = False) -> pd.DataFrame:
 
     # Mismo universo adulto en perfiles, deciles y concentración nacional.
     n_source = len(df)
+    design_units = list(df[["est_dis", "upm"]].drop_duplicates().itertuples(index=False, name=None)) if {"est_dis", "upm"}.issubset(df.columns) else None
     df = df[df["grupo_edad"].notna()].copy()
     df = add_weighted_deciles(df, "ing_eq", "factor", "decil_ing")
+    if design_units is not None:
+        df.attrs["design_units"] = design_units
     df.attrs["hogares_fuente"] = n_source
     df.attrs["hogares_excluidos_edad"] = n_source - len(df)
 
@@ -294,7 +297,7 @@ def load_enigh_hogares(force_gastos: bool = False) -> pd.DataFrame:
 # ENSAFI
 # ---------------------------------------------------------------------------
 
-_ENSAFI_KEYS = {"LLAVEMOD", "LLAVEVIV", "LLAVEHOG"}
+_ENSAFI_KEYS = {"LLAVEMOD", "LLAVEVIV", "LLAVEHOG", "EST_DIS", "UPM_DIS"}
 _ENSAFI_AMOUNTS = {
     "P5_19": (99999,),
     "P5_21": (99999,),
@@ -313,6 +316,8 @@ def load_ensafi_personas() -> pd.DataFrame:
         "EDAD_V",
         "SEXO",
         "FAC_ELE",
+        "EST_DIS",
+        "UPM_DIS",
         "NIV_BIENES",
         "INGRESO_M",
         "NIV_ESTRES",

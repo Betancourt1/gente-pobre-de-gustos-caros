@@ -8,6 +8,8 @@ con una definición distinta de D2. H3 mide movimientos financieros; H4 distingu
 tenencia, pensiones recibidas y programas para adultos mayores. El informe explica
 los universos, intervalos, cambios de clasificación y límites de cada comparación.
 
+[Todas las pruebas entre categorías](significancia.html): diferencias, IC 95%, p de Holm y decisiones para cada par de edades y años.
+
 ## H1. Gasto a la misma edad
 
 ![H1: gasto histórico a la misma edad](figures/h1_historico_comparacion.png)
@@ -44,7 +46,7 @@ los universos, intervalos, cambios de clasificación y límites de cada comparac
 | [historico_perfiles.csv](tables/historico_perfiles.csv) | 312 estimaciones por edad, indicador y año, con IC y tamaños muestrales. |
 | [h2_historico_brechas.csv](tables/h2_historico_brechas.csv) | 40 diferencias joven menos 60+ dentro de deciles de ingreso por persona. |
 | [h3_historico_asociacion.csv](tables/h3_historico_asociacion.csv) | H1c según préstamos/retiros y sus contrastes. |
-| [h4_historico_carga_renta.csv](tables/h4_historico_carga_renta.csv) | Medianas de renta/ingreso de 2014 y 2024, sin IC. |
+| [h4_historico_carga_renta.csv](tables/h4_historico_carga_renta.csv) | Medianas de renta/ingreso de 2014 y 2024, con IC por bootstrap de UPM. |
 | [h5_historico_concentracion.csv](tables/h5_historico_concentracion.csv) | Gini, top 10%, top 20% e IC por bootstrap de UPM. |
 | [historico_edades_ajustadas.csv](tables/historico_edades_ajustadas.csv) | Sensibilidades con distribución de edades de 2024. |
 | [historico_contrastes.csv](tables/historico_contrastes.csv) | Diferencias de 2024 frente a cada año anterior, en puntos porcentuales. |
@@ -67,6 +69,15 @@ python scripts/compare_all_history.py
 python scripts/compare_all_history.py --raw /ruta/enigh --output /ruta/resultados
 ```
 
-El comando reconstruye los diez CSV en `reports/tables/`, los ocho PNG en `reports/figures/`,
+El comando reconstruye los CSV de estimaciones, precisión y contrastes en `reports/tables/`, los ocho PNG de niveles y los gráficos de diferencias en `reports/figures/`,
 el registro de fuentes y el informe HTML en `reports/`.
 Lee los microdatos de nuevo; no guarda copias ni cachés individuales en esta carpeta.
+
+## Pruebas entre categorías
+
+- [Edades en cada año](tables/historico_comparaciones_edad.csv).
+- [Años a edad fija](tables/historico_comparaciones_tiempo.csv).
+- [Precisión de todos los dominios](tables/historico_precision.csv).
+- [Informe con filtros y gráficos de diferencias](significancia.html).
+
+Los intervalos son individuales; `p_ajustada_holm` determina `significativa_holm_005`. Cada fila identifica su familia. Para H2, Holm abarca los seis pares de edades en los diez deciles del año. Para años, abarca todos los pares disponibles por indicador y edad. Las columnas `estimacion` de los archivos de comparaciones están en la unidad indicada por `unidad` (p.p., índice, años, personas o MXN); las tablas de niveles conservan su escala original.

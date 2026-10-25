@@ -55,7 +55,7 @@
       ]
     }
   },
-  "h1_max_difference": 4.997408042939355e-11,
+  "h1_max_difference": 4.72625272252003e-11,
   "new_source_files": [
     {
       "path": "1994/microdata/hogares_dbf/hogares.dbf",
@@ -101,5 +101,15 @@
   "official_catalogs": [
     "https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/1994/doc/catalogo94.pdf",
     "https://www.inegi.org.mx/contenidos/programas/enigh/tradicional/2004/doc/catalogo04.pdf"
-  ]
+  ],
+  "inferencia": {
+    "replicas": 999,
+    "semilla_por_ola": "20261025 + año",
+    "medias": "Taylor por estratos y UPM, con reemplazo, sin FPC",
+    "no_lineales": "Rao–Wu m-1 UPM por estrato, reescaladas; IC t",
+    "factores": "publicados, sin recalibración",
+    "contrastes": "covarianza dentro de ola; independencia entre olas",
+    "multiplicidad": "Holm por familia explícita; IC individuales",
+    "cortes_ingreso_y_pesos_edad": "tratados como fijos"
+  }
 }

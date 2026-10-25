@@ -65,7 +65,7 @@ def plot_results(tables, out):
         ax.set_ylim(0, 16)
         ax.set_ylabel("Proporción H1c (%)")
         style_axis(ax)
-    fig.suptitle("El cambio histórico también se observa a otras edades", fontsize=16, x=.07, ha="left")
+    fig.suptitle("Perfiles históricos por edad e IC 95%", fontsize=16, x=.07, ha="left")
     fig.text(.07, .025, "ENIGH · Media ponderada de proporciones de cada hogar; IC 95% con estratos y UPM.\nAlimentos fuera + recreación, turismo y hospedaje / gasto monetario oficial. Muestras transversales distintas.", fontsize=10, color="#444444")
     fig.subplots_adjust(left=.09, right=.97, top=.88, bottom=.15, hspace=.33, wspace=.2)
     fig.savefig(out / "h1_historico_edades.png", dpi=180)
@@ -108,8 +108,10 @@ def main():
     table_dir.mkdir(parents=True, exist_ok=True)
     figure_dir.mkdir(parents=True, exist_ok=True)
     for name, frame in tables.items():
-        frame.to_csv(table_dir / f"h1_historico_{name}.csv", index=False, float_format="%.10f")
+        frame.to_csv(table_dir / f"h1_historico_{name}.csv", index=False, float_format="%.10g")
     plot_results(tables, figure_dir)
+    from gpdgc.significance_report import build
+    build(args.output)
     print(f"Listo: {len(tables)} tablas y 3 figuras en {args.output}")
 
 
