@@ -4,6 +4,9 @@ conjunto_de_datos_ensafi_2023_csv/
 # Descargas de microdatos, incluso si aún no se han descomprimido
 conjunto_de_datos_*.zip
 
+# Microdatos ENIGH históricos y documentación descargada
+data/raw/enigh/
+
 # Datos derivados y cachés
 data/processed/
 *.parquet
