@@ -125,6 +125,8 @@ La renta es mensual y el ingreso ENIGH trimestral: se usa `renta × 3 / ing_cor`
 
 La brecha joven − 60+ es **4.25 p.p. en D2** y **5.22 p.p. en D1**. D3 presenta una diferencia de 0.13 p.p. (IC 95%: 0.01 a 0.24; p Holm=0.1060). Para D2, el contraste 18–29 frente a 30–44 no supera el criterio ajustado (p=0.0674); frente a 45–59 y 60+ sí.
 
+![Componentes del gasto visible](reports/figures/h1_componentes_d2.png)
+
 En jóvenes, D2 se compone de restaurantes y hoteles (11.94 p.p.), recreación (3.33), alcohol/tabaco (0.66), accesorios seleccionados (0.11), agrupación digital (0.64) y auto nuevo (0.34). Restaurantes puede incluir comidas necesarias por trabajo. Estos resultados no identifican una preferencia generacional por el lujo.
 
 ### H1b. Bienes y servicios de la vivienda
@@ -164,6 +166,8 @@ El [informe H1c](reports/h1_historico.md) contiene las otras dos figuras —[eda
 
 D2 es mayor en hogares de 18–29 que en los de 60+ en los diez deciles. La brecha mínima es **2.46 p.p. en el decil 2** y la máxima **6.19 p.p. en el decil 5**; no crece de forma monotónica con el ingreso.
 
+![Monto del gasto visible por decil](reports/figures/h2_monto_por_decil.png)
+
 En el decil 1, las participaciones son 9.6% y 6.5%; en el decil 10, 26.8% y 21.0%. Los montos equivalentes respectivos son $1,120 y $696 en el primer decil, y $21,706 y $13,862 en el décimo.
 
 La diferencia D2 joven−60+ supera el criterio de Holm en los diez deciles (familia de 60 pares de edad/deciles). Los [gráficos de diferencias](reports/figures/h2_comparaciones_participacion.png) muestran los seis pares de edades. La persistencia dentro de deciles es descriptiva. No controla diferencias de empleo, urbanización, patrimonio, salud o composición familiar.
@@ -201,9 +205,11 @@ En 2024, H1c es **11.12%** entre hogares jóvenes con préstamo o retiro y **11.
 
 ### H4. Vivienda y expectativas de retiro
 
-![H4: vivienda y retiro](reports/figures/h4_pensiones_vivienda.png)
+![Renta de vivienda por edad](reports/figures/h4_vivienda.png)
 
 Renta el 41.1% de hogares jóvenes, frente a 23.6% de los de 30–44, 12.3% de los de 45–59 y 6.3% de los de 60+. La mediana de renta / ingreso entre rentadores es 13.4% entre jóvenes y 17.0% entre mayores.
+
+![Fuentes de ingreso previstas para la vejez](reports/figures/h4_pensiones_vivienda.png)
 
 En ENSAFI, espera recibir pensión, jubilación o AFORE el 58.9% de jóvenes y el 38.4% de mayores; espera apoyo de gobierno el 55.2% y el 85.0%; espera seguir trabajando el 72.5% y el 35.3%. Las respuestas no son excluyentes. Vivienda como meta —comprar/pagar o remodelar/mejorar— corresponde al 37.4% y al 21.5%.
 
@@ -228,6 +234,8 @@ Los IC de cada estimación están en [la tabla de precisión](reports/tables/h4_
 - **Top 20%:** 66.2%.
 - **Top 20% dentro de cada edad:** 63.0% en 18–29, 62.4% en 30–44, 65.8% en 45–59 y 71.1% en 60+.
 - Los hogares jóvenes son 7.4% de los hogares analizados y aportan 7.8% de D2; los de 60+ son 31.9% y aportan 24.8%.
+
+![Distribución del gasto visible por edad](reports/figures/h5_distribucion_por_edad.png)
 
 El gasto está concentrado en todos los grupos. No se deduce que quienes más gastan sean necesariamente los más ricos ni que los demás hogares estén libres de presión social para consumir.
 
@@ -296,9 +304,21 @@ python scripts/make_figures.py --force-gastos --replicates 999
 python scripts/make_figures.py
 ~~~
 
-No se necesita una caché previa. La reconstrucción crea `data/processed/gastos_consumo_g1_v2.parquet`, tablas de niveles, precisión y contrastes, seis figuras originales con IC y gráficos de diferencias. Las pruebas sintéticas no requieren descargar las encuestas.
+No se necesita una caché previa. La reconstrucción crea `data/processed/gastos_consumo_g1_v2.parquet`, tablas de niveles, precisión y contrastes, diez figuras del análisis original con IC y gráficos de diferencias. Las pruebas sintéticas no requieren descargar las encuestas.
 
 Las tablas de precisión y contrastes se consultan en el [informe de significancia](reports/significancia.html).
+
+### Regenerar únicamente las figuras
+
+Con los CSV agregados ya disponibles en `reports/tables`, este comando actualiza
+las 35 figuras y los dos informes HTML sin recalcular estimaciones ni modificar las tablas:
+
+```bash
+python scripts/render_figures.py
+```
+
+`--reports /ruta/resultados` permite usar otra carpeta que contenga `tables/`.
+Se conservan los nombres anteriores y se añaden cuatro imágenes para separar canastas/componentes, proporción/monto, retiro/vivienda y concentración/distribución por edad.
 
 ### Reproducir la comparación histórica
 

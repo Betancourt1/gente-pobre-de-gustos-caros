@@ -6,7 +6,7 @@ import json
 import numpy as np
 import pandas as pd
 
-def main(out):
+def main(out, *, write_tables=True):
     OUT=Path(out)
     p=pd.read_csv(OUT/'tables/historico_perfiles.csv')
     c=pd.read_csv(OUT/'tables/h5_historico_concentracion.csv')
@@ -41,7 +41,8 @@ def main(out):
             summary_intervals.loc[label,str(year)+'_ic95_inferior']=low
             summary_intervals.loc[label,str(year)+'_ic95_superior']=high
             display.loc[label,year]=f"{summary.loc[label,year]:.2f} [{low:.2f}, {high:.2f}]"
-    summary_intervals.to_csv(OUT/'tables/historico_resumen.csv',float_format='%.4f')
+    if write_tables:
+        summary_intervals.to_csv(OUT/'tables/historico_resumen.csv',float_format='%.4f')
 
 
     mapping=pd.DataFrame([
@@ -50,7 +51,8 @@ def main(out):
         [2014,'P053','P051','P032,P033','tenencia=1','tenencia=3,4','foliohog=1'],
         [2024,'P053','P051','P032,P033','tenencia=1','tenencia=3,4','foliohog=1'],
     ],columns=['anio','prestamos_ingresos','retiros_ingresos','pensiones_ingresos','vivienda_rentada','vivienda_propia','hogar_principal'])
-    mapping.to_csv(OUT/'tables/historico_correspondencias.csv',index=False)
+    if write_tables:
+        mapping.to_csv(OUT/'tables/historico_correspondencias.csv',index=False)
 
     def table(df):
         return '<div class="table-wrap">'+df.to_html(border=0,na_rep='—',float_format=lambda x:f'{x:.2f}',classes='data')+'</div>'
